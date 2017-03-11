@@ -1,4 +1,3 @@
-# SmartPiHome
 <h1>
 # SmartPiHome
 </h1>
