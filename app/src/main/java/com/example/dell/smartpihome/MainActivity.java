@@ -3,7 +3,9 @@ package com.example.dell.smartpihome;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.pubnub.api.PNConfiguration;
@@ -26,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     Switch light;
     Switch garage;
     Switch alarm;
+    Switch blind1;
+    SeekBar seekBar1;
+    int lastBlindPosition=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         light = (Switch) findViewById(R.id.lightBtn);
         garage = (Switch) findViewById(R.id.garageBtn);
         alarm = (Switch) findViewById(R.id.alarmBtn);
+        blind1 = (Switch) findViewById(R.id.blind1);
+        seekBar1 = (SeekBar) findViewById(R.id.blind1SeekBar);
 
         PNConfiguration pnConfiguration = new PNConfiguration();
         pnConfiguration.setSubscribeKey("sub-c-0baf6e4c-c5ff-11e6-b2ab-0619f8945a4f");
@@ -117,6 +124,69 @@ public class MainActivity extends AppCompatActivity {
         });
 
         pubnub.subscribe().channels(Arrays.asList("awesomeChannel")).execute();
+
+        seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progress = 0;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
+                //lastBlindPosition =  seekBar1.getProgress();
+                //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                lastBlindPosition = seekBar1.getProgress();
+                //Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                progress = seekBar1.getProgress()-lastBlindPosition;
+                    if (progress > 0) {
+                        Map message = new HashMap();
+                        message.put("type", "motor");
+                        message.put("number", 1);
+                        message.put("direction", 1);
+                        message.put("time", progress);
+
+                        pubnub.publish()
+                                .channel("SmartPiHome")
+                                .message(message)
+                                .async(new PNCallback<PNPublishResult>() {
+                                    @Override
+                                    public void onResponse(PNPublishResult result, PNStatus status) {
+                                        if (status.isError()) {
+                                            System.out.println(status);
+                                        } else {
+                                            System.out.println("Published!");
+                                        }
+                                    }
+                                });
+                    } else if (progress < 0) {
+                        progress = Math.abs(progress);
+
+                        Map message = new HashMap();
+                        message.put("type", "motor");
+                        message.put("number", 1);
+                        message.put("direction", 0);
+                        message.put("time", progress);
+
+                        pubnub.publish()
+                                .channel("SmartPiHome")
+                                .message(message)
+                                .async(new PNCallback<PNPublishResult>() {
+                                    @Override
+                                    public void onResponse(PNPublishResult result, PNStatus status) {
+                                        if (status.isError()) {
+                                            System.out.println(status);
+                                        } else {
+                                            System.out.println("Published!");
+                                        }
+                                    }
+                                });
+                    }
+                //Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     public void on_click(View view) {
@@ -204,5 +274,47 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void blindClick(View view) {
+        Map message = new HashMap();
+        if(blind1.isChecked()==true)
+        {
+            message.put("type","motor");
+            message.put("number",1);
+            message.put("direction",1);
+            message.put("time",1);
+            seekBar1.setProgress(seekBar1.getMax());
+        }
+        else
+        {
+            message.put("type","motor");
+            message.put("number",1);
+            message.put("direction",0);
+            message.put("time",1);
+            seekBar1.setProgress(0);
+        }
+        pubnub.publish()
+                .channel("SmartPiHome")
+                .message(message)
+                .async(new PNCallback<PNPublishResult>() {
+                    @Override
+                    public void onResponse(PNPublishResult result, PNStatus status) {
+                        if (status.isError()) {
+                            System.out.println(status);
+                        } else {
+                            System.out.println("Published!");
+                        }
+                    }
+                });
+    }
+
+    public void frontDoorClick(View view) {
+    }
+
+    public void kitchenLightClick(View view) {
+    }
+
+    public void corridorLightClick(View view) {
     }
 }

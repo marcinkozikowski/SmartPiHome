@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -19,6 +24,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/border"
         android:padding="@dimen/border_padding"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:id="@+id/lightLayout"
         android:orientation="vertical"
         android:layout_margin="@dimen/layout_margin">
 
@@ -32,19 +40,96 @@
             android:layout_column="0"
             android:layout_columnSpan="2"
             android:layout_margin="@dimen/header_margin"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="Salon"
-            android:layout_gravity="fill_vertical"
-            android:layout_height="wrap_content" />
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="on_click"
-            android:id="@+id/lightBtn"
-            android:layout_row="1"
-            android:layout_gravity="right"
-            android:layout_column="1"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="Salon"
+                android:layout_row="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_column="0"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:onClick="on_click"
+                android:layout_row="1"
+                android:layout_gravity="right"
+                android:id="@+id/lightBtn"
+                android:layout_column="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="Kuchnia"
+                android:layout_row="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_column="0"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:onClick="kitchenLightClick"
+                android:layout_gravity="right"
+                android:id="@+id/kitchenLightBtn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="Korytarz"
+                android:layout_row="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_column="0"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:onClick="corridorLightClick"
+                android:layout_gravity="right"
+                android:id="@+id/corridorLightBtn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="Garaż"
+                android:layout_row="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_column="0"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:onClick="garageLightClick"
+                android:layout_gravity="right"
+                android:id="@+id/garageLightBtn" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -52,6 +137,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/border"
         android:padding="@dimen/border_padding"
+        android:id="@+id/doorLayout"
+        android:layout_below="@id/lightLayout"
         android:orientation="vertical"
         android:layout_margin="@dimen/layout_margin">
 
@@ -66,20 +153,49 @@
             android:layout_column="0"
             android:layout_columnSpan="2"
             android:layout_margin="@dimen/header_margin"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Drzwi garażowe"
-            android:layout_row="3"
-            android:layout_column="0"/>
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="garageClick"
-            android:id="@+id/garageBtn"
-            android:layout_row="3"
-            android:layout_gravity="right"
-            android:layout_column="1"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Drzwi wejściowe"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                />
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="frontDoorClick"
+                android:id="@+id/frontDoorBtn"
+                android:layout_row="3"
+                android:layout_weight="1"
+                android:layout_gravity="right" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Drzwi garażowe"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                />
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="garageClick"
+                android:id="@+id/garageBtn"
+                android:layout_row="3"
+                android:layout_weight="1"
+                android:layout_gravity="right" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -88,6 +204,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:id="@+id/alarmLayout"
+        android:layout_below="@id/blindsLayout"
         android:background="@drawable/border"
         android:padding="@dimen/border_padding"
         android:layout_margin="@dimen/layout_margin">
@@ -126,6 +244,8 @@
         android:orientation="vertical"
         android:background="@drawable/border"
         android:padding="@dimen/border_padding"
+        android:id="@+id/blindsLayout"
+        android:layout_below="@id/doorLayout"
         android:layout_margin="@dimen/layout_margin">
 
         <TextView
@@ -207,4 +327,5 @@
 
 
 
-</LinearLayout>
+</RelativeLayout>
+</ScrollView>
