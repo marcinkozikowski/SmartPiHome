@@ -1,0 +1,120 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragment.LightFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:padding="@dimen/border_padding"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:id="@+id/lightLayout"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/layout_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oświetlenie"
+            android:layout_row="0"
+            android:textSize="@dimen/header_text_size"
+            android:layout_gravity="center"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:layout_margin="@dimen/header_margin"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="Salon"
+                android:layout_row="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_column="0"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:onClick="LightClick"
+                android:layout_row="1"
+                android:layout_gravity="right"
+                android:id="@+id/lightBtn"
+                android:layout_column="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="Kuchnia"
+                android:layout_row="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_column="0"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:onClick="LightClick"
+                android:layout_gravity="right"
+                android:id="@+id/kitchenLightBtn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="Korytarz"
+                android:layout_row="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_column="0"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:onClick="LightClick"
+                android:layout_gravity="right"
+                android:id="@+id/corridorLightBtn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="Garaż"
+                android:layout_row="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_column="0"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:onClick="LightClick"
+                android:layout_gravity="right"
+                android:id="@+id/garageLightBtn" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,161 @@
+<ScrollView
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragment.BlindsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/border"
+        android:padding="@dimen/border_padding"
+        android:id="@+id/blindsLayout"
+        android:layout_below="@id/doorLayout"
+        android:layout_margin="@dimen/layout_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rolety"
+            android:layout_row="4"
+            android:textSize="@dimen/header_text_size"
+            android:layout_margin="@dimen/header_margin"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:layout_column="0"
+            android:layout_columnSpan="2"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/border"
+            android:padding="@dimen/border_padding"
+            android:layout_margin="@dimen/layout_margin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/layout_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Roleta w salonie"
+                    android:gravity="left"
+                    android:layout_weight="1"/>
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="blindClick"
+                    android:id="@+id/blind1"
+                    android:gravity="right"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/layout_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zamknięta"
+                    android:gravity="left"
+                    android:layout_weight="1"/>
+
+                <android.support.v7.widget.AppCompatSeekBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="10"
+                    android:layout_weight="6"
+                    android:id="@+id/blind1SeekBar"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Otwarta"
+                    android:gravity="right"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/border"
+            android:padding="@dimen/border_padding"
+            android:layout_margin="@dimen/layout_margin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/layout_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Roleta w kuchni"
+                    android:gravity="center|left"
+                    android:layout_weight="1"/>
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="blindClick"
+                    android:id="@+id/kitchenblind1"
+                    android:gravity="right"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/layout_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zamknięta"
+                    android:gravity="left"
+                    android:layout_weight="1"/>
+
+                <android.support.v7.widget.AppCompatSeekBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="10"
+                    android:layout_weight="6"
+                    android:id="@+id/kitchenblind1SeekBar"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Otwarta"
+                    android:gravity="right"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</FrameLayout>
+
+</ScrollView>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_48px"
+            android:title="Pulpit" />
+        <item
+            android:id="@+id/nav_light"
+            android:icon="@drawable/ic_lightbulb_outline_black_48px"
+            android:title="Oświetlenie" />
+        <item
+            android:id="@+id/nav_door"
+            android:icon="@drawable/ic_door"
+            android:title="Drzwi" />
+        <item
+            android:id="@+id/nav_blinds"
+            android:icon="@drawable/ic_blinds_black_48px"
+            android:title="Rolety" />
+        <item
+            android:id="@+id/nav_alarm"
+            android:icon="@drawable/ic_warning_black_48px"
+            android:title="Alarm" />
+    </group>
+
+    <item android:title="Multimedia">
+        <menu>
+            <item
+                android:id="@+id/nav_stream"
+                android:icon="@drawable/ic_input_black_48px"
+                android:title="Odtwarzacz" />
+            <item
+                android:id="@+id/nav_camera"
+                android:icon="@drawable/ic_camera_48px"
+                android:title="Kamery" />
+        </menu>
+    </item>
+
+    <item android:title="Ustawienia">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings_black_48px"
+                android:title="Ustawienia" />
+            <item
+                android:id="@+id/nav_login"
+                android:icon="@drawable/ic_accessibility_black_48px"
+                android:title="Zaloguj" />
+        </menu>
+    </item>
+
+</menu>
