@@ -3,6 +3,7 @@ package com.example.dell.smartpihome;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -22,9 +23,11 @@ import android.widget.LinearLayout;
 
 import fragment.AlarmFragment;
 import fragment.BlindsFragment;
+import fragment.CameraFragment;
 import fragment.DoorFragment;
 import fragment.HomeFragment;
 import fragment.LightFragment;
+import fragment.StreamFragment;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -32,9 +35,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.gson.JsonObject;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.callbacks.PNCallback;
@@ -58,7 +63,11 @@ public class Main3Activity extends AppCompatActivity
     Switch alarm;
     Switch blind1;
     SeekBar seekBar1;
+    TextView temperatureTextView;
+    TextView humidityTextView;
     int lastBlindPosition=0;
+    String temp = "24";
+    String huminidity = "50";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +76,7 @@ public class Main3Activity extends AppCompatActivity
 
         //TODO: dodac pozostale kontrolki
         light = (Switch) findViewById(R.id.lightBtn);
+        garage = (Switch)findViewById(R.id.garageBtn);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -102,7 +112,7 @@ public class Main3Activity extends AppCompatActivity
                     // UI / internal notifications, etc
 
                     if (status.getCategory() == PNStatusCategory.PNConnectedCategory){
-                        pubnub.publish().channel("awesomeChannel").message("hello!!").async(new PNCallback<PNPublishResult>() {
+                        pubnub.publish().channel("SmartPiHome").message(prepareMessage("temp",1,26)).async(new PNCallback<PNPublishResult>() {
                             @Override
                             public void onResponse(PNPublishResult result, PNStatus status) {
                                 // Check whether request successfully completed or not.
@@ -138,20 +148,40 @@ public class Main3Activity extends AppCompatActivity
             public void message(PubNub pubnub, PNMessageResult message) {
                 // Handle new message stored in message.message
                 if (message.getChannel() != null) {
+                    try{
+                        JsonObject msg = message.getMessage().getAsJsonObject();
+                        if(msg.get("what").getAsString().equals("temp"))
+                        {
+                            temp = msg.get("pin").getAsString();
+                            huminidity = msg.get("state").getAsString();
+
+                            System.out.println("Temperature from Pi: " + temp);
+                            System.out.println("Huminidity from Pi: "+huminidity);
+                        }
+
+                    } catch (Exception e)
+                    {
+                        System.out.println(e.toString());
+                    }
                     // Message has been received on channel group stored in
                     // message.getChannel()
+//                    JsonObject msg = null;
+//                    if(message.getMessage().isJsonObject()) {
+//                        msg = message.getMessage().getAsJsonObject();
+//                        if(msg.has("what"))
+//                        {
+//                            String temp = msg.get("pin").getAsString();
+//                            String humidity = msg.get("state").getAsString();
+//
+//                            System.out.println(temp);
+//                            System.out.println(humidity);
+//                        }
+//
+//                    }
                 }
                 else {
-                    // Message has been received on channel stored in
-                    // message.getSubscription()
+                    //System.out.print(message.toString());
                 }
-
-            /*
-                log the following items with your favorite logger
-                    - message.getMessage()
-                    - message.getSubscription()
-                    - message.getTimetoken()
-            */
             }
 
             @Override
@@ -160,7 +190,8 @@ public class Main3Activity extends AppCompatActivity
             }
         });
 
-        pubnub.subscribe().channels(Arrays.asList("awesomeChannel")).execute();
+        pubnub.subscribe().channels(Arrays.asList("SmartPiHome")).execute();
+        publishMessage(prepareMessage("temp",1,26));
 
         Fragment fragment = new HomeFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -170,6 +201,11 @@ public class Main3Activity extends AppCompatActivity
                 .beginTransaction();
         fragmentTransaction1.replace(R.id.mainFrame,
                 fragment);
+        Bundle bundle=new Bundle();
+        bundle.putString("temp", temp);
+        bundle.putString("huminidity",huminidity);
+
+        fragment.setArguments(bundle);
         fragmentTransaction1.commit();
     }
 
@@ -222,7 +258,17 @@ public class Main3Activity extends AppCompatActivity
                     .beginTransaction();
             fragmentTransaction1.replace(R.id.mainFrame,
                     fragment);
+            Bundle bundle=new Bundle();
+            bundle.putString("temp", temp);
+            bundle.putString("huminidity",huminidity);
+
+            fragment.setArguments(bundle);
+
             fragmentTransaction1.commit();
+
+            publishMessage(prepareMessage("temp",1,26));
+
+
 
         } else if (id == R.id.nav_light) {
             Fragment fragment = new LightFragment();
@@ -269,7 +315,27 @@ public class Main3Activity extends AppCompatActivity
             fragmentTransaction1.commit();
 
         } else if (id == R.id.nav_camera) {
+            Fragment fragment = new CameraFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
 
+            FragmentTransaction fragmentTransaction1 = fragmentManager
+                    .beginTransaction();
+            fragmentTransaction1.replace(R.id.mainFrame,
+                    fragment);
+            fragmentTransaction1.commit();
+
+        } else if (id==R.id.nav_stream)
+        {
+            Fragment fragment = new StreamFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
+
+            FragmentTransaction fragmentTransaction1 = fragmentManager
+                    .beginTransaction();
+            fragmentTransaction1.replace(R.id.mainFrame,
+                    fragment);
+            fragmentTransaction1.commit();
         }
 
 
@@ -324,6 +390,11 @@ public class Main3Activity extends AppCompatActivity
             pin =3;
             currentButton = (Switch)findViewById(view.getId());
         }
+        else if(view.getId()==R.id.corridorLightBtn)
+        {
+            pin =3;
+            currentButton = (Switch)findViewById(view.getId());
+        }
                 Map message = new HashMap();
 
         if(currentButton.isChecked()==true)
@@ -334,6 +405,36 @@ public class Main3Activity extends AppCompatActivity
         {
             publishMessage(prepareMessage("light",0,pin));
         }
+    }
+
+    public void garageDoorClick(View view) {
+        garage = (Switch)findViewById(R.id.garageBtn);
+        Map message = new HashMap();
+        if(garage.isChecked()==true)
+        {
+            message.put("type","door");
+            message.put("state",1);
+            message.put("pin_number",17);
+        }
+        else
+        {
+            message.put("type","door");
+            message.put("state",0);
+            message.put("pin_number",17);
+        }
+        pubnub.publish()
+                .channel("SmartPiHome")
+                .message(message)
+                .async(new PNCallback<PNPublishResult>() {
+                    @Override
+                    public void onResponse(PNPublishResult result, PNStatus status) {
+                        if (status.isError()) {
+                            System.out.println(status);
+                        } else {
+                            System.out.println("Published!");
+                        }
+                    }
+                });
     }
 }
 

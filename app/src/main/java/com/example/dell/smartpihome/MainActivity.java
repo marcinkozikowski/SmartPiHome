@@ -9,6 +9,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.gson.JsonObject;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.callbacks.PNCallback;
@@ -100,14 +101,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void message(PubNub pubnub, PNMessageResult message) {
-                // Handle new message stored in message.message
-                if (message.getChannel() != null) {
-                    // Message has been received on channel group stored in
-                    // message.getChannel()
+                JsonObject msg = message.getMessage().getAsJsonObject();
+                System.out.print(msg.get("type"));
+                if (message.getChannel() == "SmartPiHome") {
+                    System.out.print(message.getMessage());
                 }
                 else {
-                    // Message has been received on channel stored in
-                    // message.getSubscription()
+
                 }
 
             /*
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        pubnub.subscribe().channels(Arrays.asList("awesomeChannel")).execute();
+        pubnub.subscribe().channels(Arrays.asList("SmartPiHome")).execute();
 
         seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progress = 0;

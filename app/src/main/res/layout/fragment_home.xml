@@ -122,6 +122,7 @@
                             android:textSize="@dimen/header_text_size"
                             android:layout_gravity="center"
                             android:layout_weight="1"
+                            android:id="@+id/TemperatureTextView"
                             android:text="21 ºC "/>
                     </LinearLayout>
 
@@ -145,6 +146,7 @@
                             android:textColor="@color/headerTextColor"
                             android:layout_gravity="center"
                             android:textSize="@dimen/header_text_size"
+                            android:id="@+id/HumidityTextView"
                             android:text="72%"/>
                     </LinearLayout>
 

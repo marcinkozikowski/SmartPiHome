@@ -8,7 +8,10 @@
     <color name="colorPrimaryDarkBlue">#808e95</color>
     <color name="colorAccentBlue">#e2f1f8</color>
 
+    <color name="backgroundColor">#F5F5F5</color>
     <color name="headerTextColor">#494949</color>
+
+
 
 
 </resources>
