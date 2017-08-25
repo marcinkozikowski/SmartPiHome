@@ -10,9 +10,15 @@
     android:background="@drawable/background_gradient">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mainFrame">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/mainFrame">
     </FrameLayout>
+
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/mainFrame">-->
+    <!--</FrameLayout>-->
 
 </android.support.constraint.ConstraintLayout>
