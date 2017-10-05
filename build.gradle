@@ -2,6 +2,10 @@
 
 buildscript {
     repositories {
+        mavenCentral()
+        maven {
+            url 'https://mvnrepository.com/artifact/org.fourthline.cling/cling-core';
+        }
         jcenter()
     }
     dependencies {
@@ -15,6 +19,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
+
     }
 }
 

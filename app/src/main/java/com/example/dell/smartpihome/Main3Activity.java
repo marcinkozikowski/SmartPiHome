@@ -1,17 +1,10 @@
 package com.example.dell.smartpihome;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,24 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
-
-import fragment.AlarmFragment;
-import fragment.BlindsFragment;
-import fragment.CameraFragment;
-import fragment.DoorFragment;
-import fragment.HomeFragment;
-import fragment.LightFragment;
-import fragment.StreamFragment;
-
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.gson.JsonObject;
@@ -53,6 +33,14 @@ import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import fragment.AlarmFragment;
+import fragment.BlindsFragment;
+import fragment.CameraFragment;
+import fragment.DoorFragment;
+import fragment.HomeFragment;
+import fragment.LightFragment;
+import fragment.StreamFragment;
 
 public class Main3Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -258,6 +246,9 @@ public class Main3Activity extends AppCompatActivity
                     .beginTransaction();
             fragmentTransaction1.replace(R.id.mainFrame,
                     fragment);
+
+            publishMessage(prepareMessage("temp",1,26));
+
             Bundle bundle=new Bundle();
             bundle.putString("temp", temp);
             bundle.putString("huminidity",huminidity);
@@ -266,7 +257,6 @@ public class Main3Activity extends AppCompatActivity
 
             fragmentTransaction1.commit();
 
-            publishMessage(prepareMessage("temp",1,26));
 
 
 
@@ -373,27 +363,40 @@ public class Main3Activity extends AppCompatActivity
                 });
     }
 
-    // TODO: dopisac metode wykrywajaca jakie swiatlo wlaczyc i jaki pin przydzielic
+    // TODO: dopisac metode wykrywajaca jakie swiatlo wlaczyc i jaki pin przydzielic np poprzez schared prefrences
     public void LightClick(View view) {
 
-        light = (Switch) findViewById(R.id.lightBtn);
         int pin = 0;
-        Switch currentButton=null;
+        ToggleButton currentButton=null;
+
+        ImageView livingRoom = (ImageView)findViewById(R.id.LivingRoomLightImg);
+        ImageView kitchen = (ImageView)findViewById(R.id.KitchenLightImg);
+        ImageView corridor = (ImageView)findViewById(R.id.CorridorLightImg);
+        ImageView garage = (ImageView)findViewById(R.id.GarageLightImg);
 
         if(view.getId()==R.id.lightBtn)
         {
-            pin =4;
-            currentButton = (Switch)findViewById(view.getId());
+            pin =3;
+            currentButton = (ToggleButton) findViewById(view.getId());
+//            if (currentButton.isChecked()==true)
+//            {
+//                livingRoom.setImageResource(R.drawable.light_bulb_on);
+//            }
         }
         else if(view.getId()==R.id.kitchenLightBtn)
         {
-            pin =3;
-            currentButton = (Switch)findViewById(view.getId());
+            pin =4;
+            currentButton = (ToggleButton) findViewById(view.getId());
         }
-        else if(view.getId()==R.id.corridorLightBtn)
+        else if(view.getId()==R.id.CorridorLightBtn)
         {
-            pin =3;
-            currentButton = (Switch)findViewById(view.getId());
+            pin =27;
+            currentButton = (ToggleButton) findViewById(view.getId());
+        }
+        else if(view.getId()==R.id.GarageLightBtn)
+        {
+            pin =22;
+            currentButton = (ToggleButton) findViewById(view.getId());
         }
                 Map message = new HashMap();
 
@@ -407,34 +410,22 @@ public class Main3Activity extends AppCompatActivity
         }
     }
 
+
+    // TODO: zmienic garageDoor na uniwewrslana metode door i wykrywac o ktore drzwi nam chodzi
     public void garageDoorClick(View view) {
         garage = (Switch)findViewById(R.id.garageBtn);
-        Map message = new HashMap();
+
         if(garage.isChecked()==true)
         {
-            message.put("type","door");
-            message.put("state",1);
-            message.put("pin_number",17);
+//            message.put("type","door");
+//            message.put("state",1);
+//            message.put("pin_number",17);
+            publishMessage(prepareMessage("door",1,17));
         }
         else
         {
-            message.put("type","door");
-            message.put("state",0);
-            message.put("pin_number",17);
+            publishMessage(prepareMessage("door",0,17));
         }
-        pubnub.publish()
-                .channel("SmartPiHome")
-                .message(message)
-                .async(new PNCallback<PNPublishResult>() {
-                    @Override
-                    public void onResponse(PNPublishResult result, PNStatus status) {
-                        if (status.isError()) {
-                            System.out.println(status);
-                        } else {
-                            System.out.println("Published!");
-                        }
-                    }
-                });
     }
 }
 

@@ -14,6 +14,9 @@ android {
         ndk {
             moduleName "prebuilt-libjpeg"
         }
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
@@ -21,14 +24,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile group: 'com.pubnub', name: 'pubnub-gson', version: '4.4.4'
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    compile 'com.example.dell.smartpihome.lib:mjpegviewer_v1.0.3@aar'
+    compile 'com.pubnub:pubnub-gson:4.4.4'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

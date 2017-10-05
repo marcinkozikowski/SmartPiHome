@@ -6,69 +6,120 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/border"
-        android:padding="@dimen/border_padding"
-        android:id="@+id/doorLayout"
-        android:layout_below="@id/lightLayout"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/layout_margin">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:id="@+id/lightLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Drzwi"
-            android:layout_row="2"
-            android:textSize="@dimen/header_text_size"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            android:layout_column="0"
-            android:layout_columnSpan="2"
-            android:layout_margin="@dimen/header_margin"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_margin="@dimen/layout_margin"
+            android:background="@drawable/border"
+            android:orientation="vertical"
+            android:padding="@dimen/border_padding">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Drzwi wejściowe"
+                android:layout_column="0"
+                android:layout_columnSpan="2"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                />
-            <Switch
-                android:layout_width="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_row="0"
+                android:text="Drzwi"
+                android:textSize="@dimen/header_text_size" />
+
+            <LinearLayout
+                android:id="@+id/LivingRoomLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="frontDoorClick"
-                android:id="@+id/frontDoorBtn"
-                android:layout_row="3"
                 android:layout_weight="1"
-                android:layout_gravity="right" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_weight="16"
+                    android:text="Wejściowe"
+                    android:textSize="@dimen/smart_things_titles_text_size" />
+
+                <ToggleButton
+                    android:id="@+id/frontDoorBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_weight="9"
+                    android:background="@drawable/check_front_door_state"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:onClick="frontDoorClick"
+                    android:textOff="Off"
+                    android:textOn="On" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/KitchenLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_row="1"
+                    android:layout_weight="16"
+                    android:text="Garażowe"
+                    android:textSize="@dimen/smart_things_titles_text_size" />
+
+                <ToggleButton
+                    android:id="@+id/garageDoorBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_weight="9"
+                    android:background="@drawable/check_garage_door_state"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textOff="Off"
+                    android:onClick="frontDoorClick"
+                    android:textOn="On" />
+            </LinearLayout>
+
+
+
+
 
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/lightOptionsLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_margin"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:orientation="vertical"
+            android:padding="@dimen/border_padding">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Drzwi garażowe"
+                android:layout_column="0"
+                android:layout_columnSpan="2"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                />
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="garageDoorClick"
-                android:id="@+id/garageBtn"
-                android:layout_row="3"
-                android:layout_weight="1"
-                android:layout_gravity="right" />
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_row="0"
+                android:text="Szybie akcje"
+                android:textSize="@dimen/header_text_size" />
 
         </LinearLayout>
-
-
     </LinearLayout>
 
 </FrameLayout>

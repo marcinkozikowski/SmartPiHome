@@ -1,14 +1,17 @@
 package fragment;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.example.dell.smartpihome.R;
+import com.longdo.mjpegviewer.MjpegView;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +22,17 @@ import com.example.dell.smartpihome.R;
  * create an instance of this fragment.
  */
 public class CameraFragment extends Fragment {
+
+    WebView webview;
+
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+    }
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -52,6 +66,7 @@ public class CameraFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,13 +74,32 @@ public class CameraFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_camera, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_camera, container, false);
+
+        MjpegView viewer = (MjpegView)v.findViewById(R.id.mjpegview);
+        viewer.setMode(MjpegView.MODE_FIT_WIDTH);
+        viewer.setAdjustHeight(true);
+        viewer.setUrl("http://217.126.89.102:8020/axis-cgi/mjpg/video.cgi?resolution=320x240");
+        viewer.startStream();
+
+        webview=(WebView)v.findViewById(R.id.webview1);
+        webview.setWebViewClient(new MyWebViewClient());
+        openURL();
+
+        return v;
+    }
+
+    private void openURL() {
+        webview.loadUrl("http://192.168.1.64:8081");
+        webview.requestFocus();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

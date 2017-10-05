@@ -57,6 +57,7 @@
                     android:background="@drawable/check_light_state"
                     android:gravity="center"
                     android:textColor="#000000"
+                    android:onClick="LightClick"
                     android:textOff="Off"
                     android:textOn="On" />
             </LinearLayout>
@@ -88,6 +89,7 @@
                     android:gravity="center"
                     android:textColor="#000000"
                     android:textOff="Off"
+                    android:onClick="LightClick"
                     android:textOn="On" />
             </LinearLayout>
 
@@ -115,6 +117,7 @@
                     android:layout_weight="9"
                     android:background="@drawable/check_light_state"
                     android:gravity="center"
+                    android:onClick="LightClick"
                     android:textColor="#000000"
                     android:textOff="Off"
                     android:textOn="On" />
@@ -142,6 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/layout_margin"
                     android:layout_weight="9"
+                    android:onClick="LightClick"
                     android:background="@drawable/check_light_state"
                     android:gravity="center"
                     android:textColor="#000000"
