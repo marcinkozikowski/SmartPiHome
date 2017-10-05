@@ -49,14 +49,18 @@
                     android:layout_height="wrap_content"
                     android:text="Roleta w salonie"
                     android:gravity="left"
-                    android:layout_weight="1"/>
-                <Switch
+                    android:layout_weight="5"/>
+                <ToggleButton
+                    android:id="@+id/livingRoomBlindBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="blindClick"
-                    android:id="@+id/blind1"
-                    android:gravity="right"
-                    android:layout_weight="1"/>
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/check_blinds_state"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textOff="Off"
+                    android:textOn="On" />
 
             </LinearLayout>
 
@@ -110,14 +114,16 @@
                     android:layout_height="wrap_content"
                     android:text="Roleta w kuchni"
                     android:gravity="center|left"
-                    android:layout_weight="1"/>
-                <Switch
+                    android:layout_weight="5"/>
+                <ToggleButton
+                    android:id="@+id/kitchenBlindBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="blindClick"
-                    android:id="@+id/kitchenblind1"
-                    android:gravity="right"
-                    android:layout_weight="1"/>
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/check_blinds_state"
+                    android:gravity="center"
+                    android:textColor="#000000" />
 
             </LinearLayout>
 

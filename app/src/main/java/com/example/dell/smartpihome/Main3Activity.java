@@ -67,7 +67,14 @@ public class Main3Activity extends AppCompatActivity
         garage = (Switch)findViewById(R.id.garageBtn);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.smart_pi_home);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.smart_pi_home);
+        getSupportActionBar().setLogo(R.drawable.smart_pi_home);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
