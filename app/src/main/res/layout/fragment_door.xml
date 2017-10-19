@@ -35,6 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_margin="@dimen/layout_margin"
+                android:background="@drawable/border"
                 android:orientation="horizontal">
 
                 <TextView
@@ -56,16 +58,16 @@
                     android:background="@drawable/check_front_door_state"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:onClick="frontDoorClick"
-                    android:textOff="Off"
-                    android:textOn="On" />
+                    android:onClick="frontDoorClick" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/KitchenLinearLayout"
+                android:id="@+id/GarageDoorLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_margin="@dimen/layout_margin"
+                android:background="@drawable/border"
                 android:orientation="horizontal">
 
                 <TextView
@@ -87,9 +89,7 @@
                     android:background="@drawable/check_garage_door_state"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textOff="Off"
-                    android:onClick="frontDoorClick"
-                    android:textOn="On" />
+                    android:onClick="frontDoorClick" />
             </LinearLayout>
 
 
@@ -99,11 +99,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/lightOptionsLayout"
+            android:id="@+id/fastDoorOptionsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/layout_margin"
-            android:layout_weight="1"
             android:background="@drawable/border"
             android:orientation="vertical"
             android:padding="@dimen/border_padding">
@@ -123,6 +122,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/border"
+                android:layout_margin="@dimen/layout_margin"
                 android:orientation="horizontal">
 
                 <TextView
@@ -143,9 +144,7 @@
                     android:background="@drawable/locked_door_100"
                     android:gravity="center"
                     android:textColor="#000000"
-                    android:textOff="Off"
-                    android:onClick="frontDoorClick"
-                    android:textOn="On" />
+                    android:onClick="frontDoorClick" />
             </LinearLayout>
 
         </LinearLayout>

@@ -52,7 +52,13 @@
             <item
                 android:id="@+id/nav_login"
                 android:icon="@drawable/ic_accessibility_black_48px"
-                android:title="Zaloguj" />
+                android:title="Zaloguj"
+                android:onClick="LoginLogout_Click"/>
+            <item
+                android:id="@+id/nav_exit"
+                android:icon="@drawable/ic_exit_to_app_black_48px"
+                android:title="Zakończ"
+                android:onClick="ExitApp_Click"/>
         </menu>
     </item>
 

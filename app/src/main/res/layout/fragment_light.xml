@@ -14,8 +14,9 @@
         <LinearLayout
             android:id="@+id/lightLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="@dimen/layout_margin"
+            android:layout_weight="1"
             android:background="@drawable/border"
             android:orientation="vertical"
             android:padding="@dimen/border_padding">
@@ -36,7 +37,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_margin="@dimen/layout_margin"
+                android:background="@drawable/border"
+                android:orientation="horizontal"
+                >
 
                 <TextView
                     android:layout_width="match_parent"
@@ -53,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/layout_margin"
-                    android:layout_weight="9"
+                    android:layout_weight="12"
                     android:background="@drawable/check_light_state"
                     android:gravity="center"
                     android:textColor="#000000"
@@ -67,6 +71,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_margin="@dimen/layout_margin"
+                android:background="@drawable/border"
                 android:orientation="horizontal">
 
                 <TextView
@@ -84,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/layout_margin"
-                    android:layout_weight="9"
+                    android:layout_weight="12"
                     android:background="@drawable/check_light_state"
                     android:gravity="center"
                     android:textColor="#000000"
@@ -98,6 +104,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_margin="@dimen/layout_margin"
+                android:background="@drawable/border"
                 android:orientation="horizontal">
 
                 <TextView
@@ -114,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/layout_margin"
-                    android:layout_weight="9"
+                    android:layout_weight="12"
                     android:background="@drawable/check_light_state"
                     android:gravity="center"
                     android:onClick="LightClick"
@@ -128,6 +136,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_margin="@dimen/layout_margin"
+                android:background="@drawable/border"
                 android:orientation="horizontal">
 
                 <TextView
@@ -144,7 +154,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/layout_margin"
-                    android:layout_weight="9"
+                    android:layout_weight="12"
                     android:onClick="LightClick"
                     android:background="@drawable/check_light_state"
                     android:gravity="center"
@@ -158,9 +168,9 @@
         <LinearLayout
             android:id="@+id/lightOptionsLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="@dimen/layout_margin"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:background="@drawable/border"
             android:orientation="vertical"
             android:padding="@dimen/border_padding">
@@ -175,6 +185,40 @@
                 android:layout_row="0"
                 android:text="Szybie akcje"
                 android:textSize="@dimen/header_text_size" />
+
+            <LinearLayout
+                android:id="@+id/FastLightLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/layout_margin"
+                android:background="@drawable/border"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_weight="16"
+                    android:text="Oświetlenie w całym domu"
+                    android:textSize="@dimen/smart_things_titles_text_size" />
+
+                <ToggleButton
+                    android:id="@+id/fastLightBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:layout_weight="12"
+                    android:background="@drawable/check_light_state"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:onClick="LightClick"
+                    android:textOff="Off"
+                    android:textOn="On" />
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

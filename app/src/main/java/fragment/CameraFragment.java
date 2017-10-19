@@ -10,7 +10,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.example.dell.smartpihome.R;
-import com.longdo.mjpegviewer.MjpegView;
 
 
 /**
@@ -84,11 +83,11 @@ public class CameraFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_camera, container, false);
 
-        MjpegView viewer = (MjpegView)v.findViewById(R.id.mjpegview);
-        viewer.setMode(MjpegView.MODE_FIT_WIDTH);
-        viewer.setAdjustHeight(true);
-        viewer.setUrl("http://217.126.89.102:8020/axis-cgi/mjpg/video.cgi?resolution=320x240");
-        viewer.startStream();
+//        MjpegView viewer = (MjpegView)v.findViewById(R.id.mjpegview);
+//        viewer.setMode(MjpegView.MODE_FIT_WIDTH);
+//        viewer.setAdjustHeight(true);
+//        viewer.setUrl("http://217.126.89.102:8020/axis-cgi/mjpg/video.cgi?resolution=320x240");
+//        viewer.startStream();
 
         webview=(WebView)v.findViewById(R.id.webview1);
         webview.setWebViewClient(new MyWebViewClient());

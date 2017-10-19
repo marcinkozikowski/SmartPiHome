@@ -1,5 +1,7 @@
 package com.example.dell.smartpihome;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -433,6 +435,47 @@ public class Main3Activity extends AppCompatActivity
         {
             publishMessage(prepareMessage("door",0,17));
         }
+    }
+
+    public void rotateLoginTitle()
+    {
+        SharedPreferences settings = getSharedPreferences("UserData", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = settings.edit();
+
+        boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
+        MenuItem login = (MenuItem)findViewById(R.id.nav_login);
+
+        if(hasLoggedIn)
+        {
+            login.setTitle("Wyloguj");
+        }
+        else if(!hasLoggedIn)
+        {
+            login.setTitle("Wyloguj");
+        }
+    }
+
+    public void LoginLogout_Click(MenuItem item) {
+        SharedPreferences settings = getSharedPreferences("UserData", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = settings.edit();
+
+        boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
+
+        if(hasLoggedIn)
+        {
+            editor.putBoolean("hasLoggedIn", false);
+            editor.commit();
+            finish();
+        }
+        else if(!hasLoggedIn) {
+            Intent login = new Intent(this, Login_Activity.class);
+            startActivity(login);
+            finish();
+        }
+    }
+
+    public void ExitApp_Click(MenuItem item) {
+        finish();
     }
 }
 

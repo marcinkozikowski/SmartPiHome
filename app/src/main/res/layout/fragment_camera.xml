@@ -1,38 +1,75 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stream="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:stream="http://schemas.android.com/apk/res-auto"
     tools:context="fragment.CameraFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/lightLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/layout_margin"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:orientation="vertical"
+            android:padding="@dimen/border_padding">
 
-        <com.longdo.mjpegviewer.MjpegView
-            android:id="@+id/mjpegview"
-            android:layout_width="250dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_columnSpan="2"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_row="0"
+                android:text="Kamera w Garażu"
+                android:textSize="@dimen/header_text_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/layout_margin"
+                android:background="@drawable/border"
+                android:layout_weight="1">
+
+                <WebView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/webview1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:scrollbars="none" />
+
+
+
+            </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/layout_margin"
+            android:layout_row="0"
+            android:text="Kamera w Salonie"
+            android:textSize="@dimen/header_text_size" />
 
-        <!--<com.longdo.mjpegviewer.MjpegView-->
-            <!--android:id="@+id/mjpegview2"-->
-            <!--android:layout_toRightOf="@id/mjpegview"-->
-            <!--android:layout_width="250dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"/>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/layout_margin"
+            android:background="@drawable/border"
+            android:layout_weight="1">
 
-        <WebView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/webview1"
-            android:layout_width="fill_parent"
-            android:layout_below="@id/mjpegview"
-            android:layout_height="fill_parent"
-            android:scrollbars="none"
-            />
-
-    </RelativeLayout>
-
+            <WebView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/webview2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="@dimen/layout_margin"
+                android:scrollbars="none" />
+        </LinearLayout>
+        </LinearLayout>
 
 
 </FrameLayout>

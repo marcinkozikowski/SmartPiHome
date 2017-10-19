@@ -58,9 +58,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/check_blinds_state"
                     android:gravity="center"
-                    android:textColor="#000000"
-                    android:textOff="Off"
-                    android:textOn="On" />
+                    android:textColor="#000000" />
 
             </LinearLayout>
 
