@@ -22,7 +22,9 @@ import com.example.dell.smartpihome.R;
  */
 public class CameraFragment extends Fragment {
 
-    WebView webview;
+    WebView webview1;
+    WebView webview2;
+
 
     private class MyWebViewClient extends WebViewClient {
         @Override
@@ -47,15 +49,6 @@ public class CameraFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CameraFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static CameraFragment newInstance(String param1, String param2) {
         CameraFragment fragment = new CameraFragment();
         Bundle args = new Bundle();
@@ -89,16 +82,20 @@ public class CameraFragment extends Fragment {
 //        viewer.setUrl("http://217.126.89.102:8020/axis-cgi/mjpg/video.cgi?resolution=320x240");
 //        viewer.startStream();
 
-        webview=(WebView)v.findViewById(R.id.webview1);
-        webview.setWebViewClient(new MyWebViewClient());
+        webview1=(WebView)v.findViewById(R.id.webview1);
+        webview1.setWebViewClient(new MyWebViewClient());
+        webview2=(WebView)v.findViewById(R.id.webview2);
+        webview2.setWebViewClient(new MyWebViewClient());
         openURL();
 
         return v;
     }
 
     private void openURL() {
-        webview.loadUrl("http://192.168.1.64:8081");
-        webview.requestFocus();
+        webview1.loadUrl("http://192.168.1.64:8081");
+        webview1.requestFocus();
+        webview2.loadUrl("http://192.168.1.64:8082");
+        webview2.requestFocus();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
