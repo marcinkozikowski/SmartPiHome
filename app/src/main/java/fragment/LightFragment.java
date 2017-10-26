@@ -10,7 +10,7 @@ import android.widget.ToggleButton;
 
 import com.example.dell.smartpihome.R;
 
-import Tools.CurrentDeviceState;
+import static com.example.dell.smartpihome.Main3Activity.tools;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +21,7 @@ import Tools.CurrentDeviceState;
  * create an instance of this fragment.
  */
 public class LightFragment extends Fragment {
-    CurrentDeviceState tools;
+    //CurrentDeviceState tools;
     ToggleButton livingRoomLight;
     ToggleButton garageLight;
     ToggleButton corridorLight;
@@ -52,18 +52,31 @@ public class LightFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View inflatedView = null;
+
         inflatedView = inflater.inflate(R.layout.fragment_light, container, false);
         //setCurrentLightState(inflatedView);
-        //livingRoomLight = (ToggleButton) inflatedView.findViewById(R.id.lightBtn);
-        //livingRoomLight.setChecked(tools.isLivingRoomLight());
+        setCurrentLightState(inflatedView);
+//        livingRoomLight = (ToggleButton) inflatedView.findViewById(R.id.lightBtn);
+//        livingRoomLight.setChecked(tools.isLivingRoomLight());
+//        garageLight = (ToggleButton) inflatedView.findViewById(R.id.GarageLightBtn);
+//        corridorLight = (ToggleButton) inflatedView.findViewById(R.id.CorridorLightBtn);
+//        kitchenLight = (ToggleButton) inflatedView.findViewById(R.id.kitchenLightBtn);
+//        fastLight = (ToggleButton) inflatedView.findViewById(R.id.fastLightBtn);
+//
+//        livingRoomLight.setChecked(tools.isLivingRoomLight());
+//        garageLight.setChecked(tools.isGarageLight());
+//        corridorLight.setChecked(tools.isCorridorLight());
+//        kitchenLight.setChecked(tools.isKitchenLight());
+//        fastLight.setChecked(tools.isFastLight());
+
         return inflatedView;
     }
 
     public View setCurrentLightState(View inflater)
     {
         livingRoomLight = (ToggleButton) inflater.findViewById(R.id.lightBtn);
-        garageLight = (ToggleButton) inflater.findViewById(R.id.garageLightBtn);
-        corridorLight = (ToggleButton) inflater.findViewById(R.id.corridorLightBtn);
+        garageLight = (ToggleButton) inflater.findViewById(R.id.GarageLightBtn);
+        corridorLight = (ToggleButton) inflater.findViewById(R.id.CorridorLightBtn);
         kitchenLight = (ToggleButton) inflater.findViewById(R.id.kitchenLightBtn);
         fastLight = (ToggleButton) inflater.findViewById(R.id.fastLightBtn);
 

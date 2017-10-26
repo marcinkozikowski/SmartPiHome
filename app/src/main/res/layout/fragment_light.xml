@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fragment.LightFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,14 +51,19 @@
                     android:layout_column="0"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/layout_margin"
-                    android:layout_weight="16"
+                    android:layout_weight="1"
                     android:text="Salon"
                     android:textSize="@dimen/smart_things_titles_text_size" />
-
-                <ToggleButton
-                    android:id="@+id/lightBtn"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/border_btn"
+                    android:layout_weight="1"
+                    android:layout_gravity="right">
+                <ToggleButton
+                    android:id="@+id/lightBtn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/btn_dimens"
                     android:layout_margin="@dimen/layout_margin"
                     android:layout_weight="12"
                     android:background="@drawable/check_light_state"
@@ -64,6 +72,7 @@
                     android:onClick="LightClick"
                     android:textOff="Off"
                     android:textOn="On" />
+            </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -81,14 +90,20 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/layout_margin"
                     android:layout_row="1"
-                    android:layout_weight="16"
+                    android:layout_weight="1"
                     android:text="Kuchnia"
                     android:textSize="@dimen/smart_things_titles_text_size" />
 
-                <ToggleButton
-                    android:id="@+id/kitchenLightBtn"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/border_btn"
+                    android:layout_weight="1"
+                    android:layout_gravity="right">
+                <ToggleButton
+                    android:id="@+id/kitchenLightBtn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/btn_dimens"
                     android:layout_margin="@dimen/layout_margin"
                     android:layout_weight="12"
                     android:background="@drawable/check_light_state"
@@ -97,6 +112,7 @@
                     android:textOff="Off"
                     android:onClick="LightClick"
                     android:textOn="On" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -113,22 +129,29 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/layout_margin"
-                    android:layout_weight="16"
+                    android:layout_weight="1"
                     android:text="Korytarz"
                     android:textSize="@dimen/smart_things_titles_text_size" />
 
-                <ToggleButton
-                    android:id="@+id/CorridorLightBtn"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/layout_margin"
-                    android:layout_weight="12"
-                    android:background="@drawable/check_light_state"
-                    android:gravity="center"
-                    android:onClick="LightClick"
-                    android:textColor="#000000"
-                    android:textOff="Off"
-                    android:textOn="On" />
+                    android:background="@drawable/border_btn"
+                    android:layout_weight="1"
+                    android:layout_gravity="right">
+
+                    <ToggleButton
+                        android:id="@+id/CorridorLightBtn"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/btn_dimens"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:background="@drawable/check_light_state"
+                        android:gravity="center"
+                        android:onClick="LightClick"
+                        android:textColor="#000000"
+                        android:textOff="Off"
+                        android:textOn="On" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -145,14 +168,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/layout_margin"
-                    android:layout_weight="16"
+                    android:layout_weight="1"
                     android:text="Garaż"
                     android:textSize="@dimen/smart_things_titles_text_size" />
-
-                <ToggleButton
-                    android:id="@+id/GarageLightBtn"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/border_btn"
+                    android:layout_weight="1"
+                    android:layout_gravity="right">
+                <ToggleButton
+                    android:id="@+id/GarageLightBtn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/btn_dimens"
                     android:layout_margin="@dimen/layout_margin"
                     android:layout_weight="12"
                     android:onClick="LightClick"
@@ -161,6 +189,7 @@
                     android:textColor="#000000"
                     android:textOff="Off"
                     android:textOn="On" />
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
@@ -202,14 +231,20 @@
                     android:layout_column="0"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/layout_margin"
-                    android:layout_weight="16"
+                    android:layout_weight="1"
                     android:text="Oświetlenie w całym domu"
                     android:textSize="@dimen/smart_things_titles_text_size" />
 
-                <ToggleButton
-                    android:id="@+id/fastLightBtn"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/border_btn"
+                    android:layout_weight="1"
+                    android:layout_gravity="right">
+                <ToggleButton
+                    android:id="@+id/fastLightBtn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/btn_dimens"
                     android:layout_margin="@dimen/layout_margin"
                     android:layout_weight="12"
                     android:background="@drawable/check_light_state"
@@ -219,8 +254,9 @@
                     android:textOff="Off"
                     android:textOn="On" />
             </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
-
+    </ScrollView>
 </FrameLayout>

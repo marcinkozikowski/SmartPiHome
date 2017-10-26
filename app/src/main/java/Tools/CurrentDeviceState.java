@@ -83,4 +83,14 @@ public final class CurrentDeviceState {
 
     private static int kitchenBlind,livingRoomBlind;
     private static boolean garageDoor,frontDoor;
+
+    public static boolean isAlarm() {
+        return alarm;
+    }
+
+    public static void setAlarm(boolean alarm) {
+        CurrentDeviceState.alarm = alarm;
+    }
+
+    private static boolean alarm;
 }

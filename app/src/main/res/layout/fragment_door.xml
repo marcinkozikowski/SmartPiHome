@@ -49,6 +49,12 @@
                     android:text="Wejściowe"
                     android:textSize="@dimen/smart_things_titles_text_size" />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_btn"
+                    android:layout_weight="2"
+                    android:layout_gravity="right">
                 <ToggleButton
                     android:id="@+id/frontDoorBtn"
                     android:layout_width="wrap_content"
@@ -59,6 +65,7 @@
                     android:gravity="center"
                     android:textColor="#000000"
                     android:onClick="doorClick" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -80,6 +87,12 @@
                     android:text="Garażowe"
                     android:textSize="@dimen/smart_things_titles_text_size" />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_btn"
+                    android:layout_weight="2"
+                    android:layout_gravity="right">
                 <ToggleButton
                     android:id="@+id/garageDoorBtn"
                     android:layout_width="wrap_content"
@@ -90,11 +103,8 @@
                     android:gravity="center"
                     android:textColor="#000000"
                     android:onClick="doorClick" />
+                </LinearLayout>
             </LinearLayout>
-
-
-
-
 
         </LinearLayout>
 
@@ -135,6 +145,12 @@
                     android:text="Zamknij/Otwórz wszystkie"
                     android:textSize="@dimen/smart_things_titles_text_size" />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_btn"
+                    android:layout_weight="2"
+                    android:layout_gravity="right">
                 <ToggleButton
                     android:id="@+id/allDoorBtn"
                     android:layout_width="wrap_content"
@@ -145,6 +161,7 @@
                     android:gravity="center"
                     android:textColor="#000000"
                     android:onClick="doorClick" />
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

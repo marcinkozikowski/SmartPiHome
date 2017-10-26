@@ -50,15 +50,13 @@ public class Main3Activity extends AppCompatActivity
     PubNub pubnub;
     Switch light;
     Switch garage;
-    Switch alarm;
-    Switch blind1;
     SeekBar seekBar1;
     TextView temperatureTextView;
     TextView humidityTextView;
     int lastBlindPosition=0;
     String temp = "24";
     String huminidity = "50";
-    CurrentDeviceState tools;
+    public static CurrentDeviceState tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -241,7 +239,6 @@ public class Main3Activity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -404,6 +401,10 @@ public class Main3Activity extends AppCompatActivity
             {
                 tools.setLivingRoomLight(true);
             }
+            else
+            {
+                tools.setLivingRoomLight(false);
+            }
         }
         else if(view.getId()==R.id.kitchenLightBtn)
         {
@@ -412,6 +413,10 @@ public class Main3Activity extends AppCompatActivity
             if (currentButton.isChecked()==true)
             {
                 tools.setKitchenLight(true);
+            }
+            else
+            {
+                tools.setKitchenLight(false);
             }
         }
         else if(view.getId()==R.id.CorridorLightBtn)
@@ -422,6 +427,10 @@ public class Main3Activity extends AppCompatActivity
             {
                 tools.setCorridorLight(true);
             }
+            else
+            {
+                tools.setCorridorLight(false);
+            }
         }
         else if(view.getId()==R.id.GarageLightBtn)
         {
@@ -431,6 +440,10 @@ public class Main3Activity extends AppCompatActivity
             {
                 tools.setGarageLight(true);
             }
+            else
+            {
+                tools.setGarageLight(false);
+            }
         }
         else if(view.getId()==R.id.fastLightBtn)
         {
@@ -438,6 +451,10 @@ public class Main3Activity extends AppCompatActivity
             if (currentButton.isChecked()==true)
             {
                 tools.setFastLight(true);
+            }
+            else
+            {
+                tools.setFastLight(false);
             }
             if(currentButton.isChecked()==true)
             {
@@ -453,7 +470,7 @@ public class Main3Activity extends AppCompatActivity
                 publishMessage(prepareMessage("light",0,27));
                 publishMessage(prepareMessage("light",0,22));
             }
-            //lightButtonsUpdate();
+            lightButtonsUpdate();
         }
 
         if(currentButton.isChecked()==true)
@@ -466,19 +483,30 @@ public class Main3Activity extends AppCompatActivity
         }
     }
 
-    public void lightButtonsUpdate()
-    {
-        ToggleButton livingRoom = (ToggleButton)findViewById(R.id.lightBtn);
-        ToggleButton kitchenRoom = (ToggleButton)findViewById(R.id.kitchenLightBtn);
-        ToggleButton corridorRoom = (ToggleButton)findViewById(R.id.corridorLightBtn);
-        ToggleButton garageRoom = (ToggleButton)findViewById(R.id.garageLightBtn);
-        ToggleButton fastLight = (ToggleButton)findViewById(R.id.fastLightBtn);
-        if(fastLight.isChecked())
-        {
+    public void lightButtonsUpdate() {
+        ToggleButton livingRoom = (ToggleButton) findViewById(R.id.lightBtn);
+        ToggleButton kitchenRoom = (ToggleButton) findViewById(R.id.kitchenLightBtn);
+        ToggleButton corridorRoom = (ToggleButton) findViewById(R.id.CorridorLightBtn);
+        ToggleButton garageRoom = (ToggleButton) findViewById(R.id.GarageLightBtn);
+        ToggleButton fastLight = (ToggleButton) findViewById(R.id.fastLightBtn);
+        if (fastLight.isChecked()) {
             livingRoom.setChecked(true);
             kitchenRoom.setChecked(true);
             corridorRoom.setChecked(true);
             garageRoom.setChecked(true);
+            tools.setKitchenLight(true);
+            tools.setLivingRoomLight(true);
+            tools.setGarageLight(true);
+            tools.setCorridorLight(true);
+        } else {
+            livingRoom.setChecked(false);
+            kitchenRoom.setChecked(false);
+            corridorRoom.setChecked(false);
+            garageRoom.setChecked(false);
+            tools.setKitchenLight(false);
+            tools.setLivingRoomLight(false);
+            tools.setGarageLight(false);
+            tools.setCorridorLight(false);
         }
     }
 
@@ -488,21 +516,56 @@ public class Main3Activity extends AppCompatActivity
 
         int pin = 0;
         ToggleButton currentButton=null;
+        ToggleButton front;
+        ToggleButton garage;
 
 
         if(view.getId()==R.id.garageDoorBtn)
         {
             pin =17;
             currentButton = (ToggleButton) findViewById(view.getId());
+            if(currentButton.isChecked())
+            {
+                tools.setGarageDoor(true);
+            }
+            else
+            {
+                tools.setGarageDoor(false);
+            }
         }
         else if(view.getId()==R.id.frontDoorBtn)
         {
             pin =10;
             currentButton = (ToggleButton) findViewById(view.getId());
+            if(currentButton.isChecked())
+            {
+                tools.setFrontDoor(true);
+            }
+            else
+            {
+                tools.setFrontDoor(false);
+            }
         }
         else if(view.getId()==R.id.allDoorBtn)
         {
+            garage = (ToggleButton)findViewById(R.id.garageDoorBtn);
+            front = (ToggleButton)findViewById(R.id.frontDoorBtn);
             currentButton = (ToggleButton) findViewById(view.getId());
+            if(currentButton.isChecked())
+            {
+                tools.setFrontDoor(true);
+                tools.setGarageDoor(true);
+                garage.setChecked(true);
+                front.setChecked(true);
+            }
+            else
+            {
+                tools.setFrontDoor(false);
+                tools.setGarageDoor(false);
+                garage.setChecked(false);
+                front.setChecked(false);
+            }
+
         }
 
         if(currentButton.isChecked()==true)

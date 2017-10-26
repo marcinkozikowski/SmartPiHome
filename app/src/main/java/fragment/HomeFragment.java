@@ -14,7 +14,7 @@ import com.example.dell.smartpihome.R;
 import java.util.LinkedList;
 import java.util.List;
 
-import Tools.CurrentDeviceState;
+import static com.example.dell.smartpihome.Main3Activity.tools;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +30,9 @@ public class HomeFragment extends Fragment {
     ImageView garageLight;
     ImageView corridorLight;
     ImageView kitchenLight;
-    CurrentDeviceState tool;
+    ImageView frontDoor;
+    ImageView garageDoor;
+    //CurrentDeviceState tool;
 
     private static final String ARG_PARAM1 = "temp";
     private static final String ARG_PARAM2 = "huminidity";
@@ -76,7 +78,8 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home,container,false);
-        checkLightState(v);
+        v =checkLightState(v);
+        v =checkDoorState(v);
         try {
             tempTextView = (TextView)v.findViewById(R.id.TemperatureTextView);
             huminidityTextView = (TextView)v.findViewById(R.id.HumidityTextView);
@@ -100,10 +103,10 @@ public class HomeFragment extends Fragment {
 
         List<ImageView> lightsList = new LinkedList<ImageView>();
         List<Boolean> lightsState = new LinkedList<Boolean>();
-        lightsState.add(tool.isLivingRoomLight());
-        lightsState.add(tool.isKitchenLight());
-        lightsState.add(tool.isCorridorLight());
-        lightsState.add(tool.isGarageLight());
+        lightsState.add(tools.isLivingRoomLight());
+        lightsState.add(tools.isKitchenLight());
+        lightsState.add(tools.isCorridorLight());
+        lightsState.add(tools.isGarageLight());
         lightsList.add(livingRoomLight);
         lightsList.add(kitchenLight);
         lightsList.add(corridorLight);
@@ -121,6 +124,29 @@ public class HomeFragment extends Fragment {
             }
         }
 
+        return inflater;
+    }
+
+    public View checkDoorState(View inflater)
+    {
+        frontDoor = (ImageView)inflater.findViewById(R.id.FrontDoorImg);
+        garageDoor = (ImageView)inflater.findViewById(R.id.GarageDoorImg);
+
+        if(tools.isFrontDoor())
+        {
+            frontDoor.setImageResource(R.drawable.icons8_door_closed_filled_100);
+        }
+        else{
+            frontDoor.setImageResource(R.drawable.icons8_door_opened_filled_100);
+        }
+
+        if(tools.isGarageDoor())
+        {
+            garageDoor.setImageResource(R.drawable.icons8_gate_filled_100);
+        }
+        else{
+            garageDoor.setImageResource(R.drawable.icons8_front_gate_open_filled_100);
+        }
         return inflater;
     }
 
@@ -148,16 +174,7 @@ public class HomeFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
