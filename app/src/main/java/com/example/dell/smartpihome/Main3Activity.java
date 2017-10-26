@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -36,6 +35,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import Tools.CurrentDeviceState;
 import fragment.AlarmFragment;
 import fragment.BlindsFragment;
 import fragment.CameraFragment;
@@ -58,6 +58,7 @@ public class Main3Activity extends AppCompatActivity
     int lastBlindPosition=0;
     String temp = "24";
     String huminidity = "50";
+    CurrentDeviceState tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -355,6 +356,18 @@ public class Main3Activity extends AppCompatActivity
         return message;
     }
 
+    public Map prepareMessage(String type,int number,int direction,double time)
+    {
+        Map message = new HashMap();
+
+        message.put("type",type);
+        message.put("number",number);
+        message.put("direction",direction);
+        message.put("time",time);
+
+        return message;
+    }
+
     public void publishMessage(Map message)
     {
         pubnub.publish()
@@ -378,36 +391,70 @@ public class Main3Activity extends AppCompatActivity
         int pin = 0;
         ToggleButton currentButton=null;
 
-        ImageView livingRoom = (ImageView)findViewById(R.id.LivingRoomLightImg);
-        ImageView kitchen = (ImageView)findViewById(R.id.KitchenLightImg);
-        ImageView corridor = (ImageView)findViewById(R.id.CorridorLightImg);
-        ImageView garage = (ImageView)findViewById(R.id.GarageLightImg);
+//        ImageView livingRoom = (ImageView)findViewById(R.id.LivingRoomLightImg);
+//        ImageView kitchen = (ImageView)findViewById(R.id.KitchenLightImg);
+//        ImageView corridor = (ImageView)findViewById(R.id.CorridorLightImg);
+//        ImageView garage = (ImageView)findViewById(R.id.GarageLightImg);
 
         if(view.getId()==R.id.lightBtn)
         {
             pin =3;
             currentButton = (ToggleButton) findViewById(view.getId());
-//            if (currentButton.isChecked()==true)
-//            {
-//                livingRoom.setImageResource(R.drawable.light_bulb_on);
-//            }
+            if (currentButton.isChecked()==true)
+            {
+                tools.setLivingRoomLight(true);
+            }
         }
         else if(view.getId()==R.id.kitchenLightBtn)
         {
             pin =4;
             currentButton = (ToggleButton) findViewById(view.getId());
+            if (currentButton.isChecked()==true)
+            {
+                tools.setKitchenLight(true);
+            }
         }
         else if(view.getId()==R.id.CorridorLightBtn)
         {
             pin =27;
             currentButton = (ToggleButton) findViewById(view.getId());
+            if (currentButton.isChecked()==true)
+            {
+                tools.setCorridorLight(true);
+            }
         }
         else if(view.getId()==R.id.GarageLightBtn)
         {
             pin =22;
             currentButton = (ToggleButton) findViewById(view.getId());
+            if (currentButton.isChecked()==true)
+            {
+                tools.setGarageLight(true);
+            }
         }
-                Map message = new HashMap();
+        else if(view.getId()==R.id.fastLightBtn)
+        {
+            currentButton = (ToggleButton) findViewById(view.getId());
+            if (currentButton.isChecked()==true)
+            {
+                tools.setFastLight(true);
+            }
+            if(currentButton.isChecked()==true)
+            {
+                publishMessage(prepareMessage("light",1,3));
+                publishMessage(prepareMessage("light",1,4));
+                publishMessage(prepareMessage("light",1,27));
+                publishMessage(prepareMessage("light",1,22));
+            }
+            else
+            {
+                publishMessage(prepareMessage("light",0,3));
+                publishMessage(prepareMessage("light",0,4));
+                publishMessage(prepareMessage("light",0,27));
+                publishMessage(prepareMessage("light",0,22));
+            }
+            //lightButtonsUpdate();
+        }
 
         if(currentButton.isChecked()==true)
         {
@@ -419,21 +466,87 @@ public class Main3Activity extends AppCompatActivity
         }
     }
 
+    public void lightButtonsUpdate()
+    {
+        ToggleButton livingRoom = (ToggleButton)findViewById(R.id.lightBtn);
+        ToggleButton kitchenRoom = (ToggleButton)findViewById(R.id.kitchenLightBtn);
+        ToggleButton corridorRoom = (ToggleButton)findViewById(R.id.corridorLightBtn);
+        ToggleButton garageRoom = (ToggleButton)findViewById(R.id.garageLightBtn);
+        ToggleButton fastLight = (ToggleButton)findViewById(R.id.fastLightBtn);
+        if(fastLight.isChecked())
+        {
+            livingRoom.setChecked(true);
+            kitchenRoom.setChecked(true);
+            corridorRoom.setChecked(true);
+            garageRoom.setChecked(true);
+        }
+    }
+
 
     // TODO: zmienic garageDoor na uniwewrslana metode door i wykrywac o ktore drzwi nam chodzi
-    public void garageDoorClick(View view) {
-        garage = (Switch)findViewById(R.id.garageBtn);
+    public void doorClick(View view) {
 
-        if(garage.isChecked()==true)
+        int pin = 0;
+        ToggleButton currentButton=null;
+
+
+        if(view.getId()==R.id.garageDoorBtn)
         {
-//            message.put("type","door");
-//            message.put("state",1);
-//            message.put("pin_number",17);
-            publishMessage(prepareMessage("door",1,17));
+            pin =17;
+            currentButton = (ToggleButton) findViewById(view.getId());
+        }
+        else if(view.getId()==R.id.frontDoorBtn)
+        {
+            pin =10;
+            currentButton = (ToggleButton) findViewById(view.getId());
+        }
+        else if(view.getId()==R.id.allDoorBtn)
+        {
+            currentButton = (ToggleButton) findViewById(view.getId());
+        }
+
+        if(currentButton.isChecked()==true)
+        {
+            if(currentButton.getId()==R.id.allDoorBtn)
+            {
+                publishMessage(prepareMessage("door",1,17));
+                publishMessage(prepareMessage("door",1,10));
+            }
+            publishMessage(prepareMessage("door",1,pin));
         }
         else
         {
-            publishMessage(prepareMessage("door",0,17));
+            if(currentButton.getId()==R.id.allDoorBtn)
+            {
+                publishMessage(prepareMessage("door",0,17));
+                publishMessage(prepareMessage("door",0,10));
+            }
+            publishMessage(prepareMessage("door",0,pin));
+        }
+    }
+
+    public void blindClick(View view)
+    {
+        ToggleButton currentButton=null;
+        int number=0;
+        if(view.getId()==R.id.livingRoomBlindBtn)
+        {
+            currentButton = (ToggleButton) findViewById(view.getId());
+            number =1;
+        }
+        else if(view.getId()==R.id.kitchenBlindBtn)
+        {
+            currentButton = (ToggleButton) findViewById(view.getId());
+            number=2;
+        }
+
+        if(currentButton.isChecked()==true)
+        {
+            publishMessage(prepareMessage("blind",number,1,1));
+        }
+        else
+        {
+            publishMessage(prepareMessage("blind",number,0,1));
         }
     }
 

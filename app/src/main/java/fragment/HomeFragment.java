@@ -1,15 +1,20 @@
 package fragment;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dell.smartpihome.R;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import Tools.CurrentDeviceState;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,10 +25,16 @@ import com.example.dell.smartpihome.R;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+    ImageView livingRoomLight;
+    ImageView garageLight;
+    ImageView corridorLight;
+    ImageView kitchenLight;
+    CurrentDeviceState tool;
+
     private static final String ARG_PARAM1 = "temp";
     private static final String ARG_PARAM2 = "huminidity";
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -37,14 +48,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
@@ -72,6 +76,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home,container,false);
+        checkLightState(v);
         try {
             tempTextView = (TextView)v.findViewById(R.id.TemperatureTextView);
             huminidityTextView = (TextView)v.findViewById(R.id.HumidityTextView);
@@ -84,6 +89,39 @@ public class HomeFragment extends Fragment {
             System.out.println(e.toString());
         }
         return v;
+    }
+
+    public View checkLightState(View inflater)
+    {
+        livingRoomLight = (ImageView)inflater.findViewById(R.id.LivingRoomLightImg);
+        kitchenLight = (ImageView)inflater.findViewById(R.id.KitchenLightImg);
+        corridorLight = (ImageView)inflater.findViewById(R.id.CorridorLightImg);
+        garageLight = (ImageView)inflater.findViewById(R.id.GarageLightImg);
+
+        List<ImageView> lightsList = new LinkedList<ImageView>();
+        List<Boolean> lightsState = new LinkedList<Boolean>();
+        lightsState.add(tool.isLivingRoomLight());
+        lightsState.add(tool.isKitchenLight());
+        lightsState.add(tool.isCorridorLight());
+        lightsState.add(tool.isGarageLight());
+        lightsList.add(livingRoomLight);
+        lightsList.add(kitchenLight);
+        lightsList.add(corridorLight);
+        lightsList.add(garageLight);
+
+        for(int i=0;i<lightsState.size();i++)
+        {
+            if(lightsState.get(i))
+            {
+                lightsList.get(i).setImageResource(R.drawable.light_bulb_on);
+            }
+            else
+            {
+                lightsList.get(i).setImageResource(R.drawable.light_bulb_off);
+            }
+        }
+
+        return inflater;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
