@@ -15,9 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.gson.JsonObject;
@@ -35,14 +37,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import CustomListAdapters.Song;
 import Tools.CurrentDeviceState;
+import Tools.MyMediaPlayer;
 import fragment.AlarmFragment;
 import fragment.BlindsFragment;
 import fragment.CameraFragment;
 import fragment.DoorFragment;
 import fragment.HomeFragment;
 import fragment.LightFragment;
-import fragment.StreamFragment;
+import fragment.MusicPlayerFragment;
 
 public class Main3Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -57,6 +61,8 @@ public class Main3Activity extends AppCompatActivity
     String temp = "24";
     String huminidity = "50";
     public static CurrentDeviceState tools;
+    public static MyMediaPlayer player = new MyMediaPlayer();
+    ListView MusicListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -324,7 +330,7 @@ public class Main3Activity extends AppCompatActivity
 
         } else if (id==R.id.nav_stream)
         {
-            Fragment fragment = new StreamFragment();
+            Fragment fragment = new MusicPlayerFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
 
@@ -652,6 +658,25 @@ public class Main3Activity extends AppCompatActivity
 
     public void ExitApp_Click(MenuItem item) {
         finish();
+    }
+
+    public void PlaySelectedSong(View view) {
+        Song choosenSong;
+        try {
+            MusicListView = (ListView)view.findViewById(R.id.MusicListView);
+            View parentRow = (View) view.getParent();
+            //MusicListView = (ListView) parentRow.getParent();
+            final int position = MusicListView.getPositionForView(parentRow);
+            Toast.makeText(this, "Position "+position, Toast.LENGTH_SHORT).show();
+//            choosenSong = player.getCurrentPlaylist().get(position);
+//            player.setCurrentSong(choosenSong);
+//            player.startPlaying();
+
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this, "Nie można odtworzyć wybrango utworu "+player.getCurrentSong().getPath().toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 }
 

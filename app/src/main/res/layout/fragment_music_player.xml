@@ -1,0 +1,118 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragment.MusicPlayerFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="top">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/border_with_fill"
+            android:layout_margin="@dimen/layout_margin">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/layout_margin"
+                android:drawableLeft="@drawable/ic_library_music_black_48px"
+                android:textColor="#FFFFFF"
+                android:id="@+id/RefreshMusicList"
+                android:onClick="RefreshMusicList"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:background="@drawable/border_btn"
+                android:drawablePadding="7dp"
+                android:text="Odśwież listę utworów" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="@dimen/layout_margin"
+                android:drawableLeft="@drawable/ic_queue_music_black_48px"
+                android:textColor="#FFFFFF"
+                android:id="@+id/SortMusic"
+                android:background="@drawable/border_btn"
+                android:drawablePadding="7dp"
+                android:text="Sortuj listę utworów"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/layout_margin"
+            android:background="@drawable/border">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:id="@+id/MusicListView"
+                android:layout_height="match_parent"
+                android:divider="#00000000"
+                android:dividerHeight="5dp">
+            </ListView>
+        </LinearLayout>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_margin="@dimen/layout_margin"
+    android:background="@drawable/border_with_fill"
+    android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_margin"
+            android:id="@+id/MusicControlLayout"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:id="@+id/PreviousImg"
+                android:src="@drawable/ic_skip_previous_black_48px"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:id="@+id/StopImg"
+                android:src="@drawable/ic_stop_black_48px"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:id="@+id/NowPlayingImg"
+                android:src="@drawable/ic_play_arrow_black_48px"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:id="@+id/NextImg"
+                android:src="@drawable/ic_skip_next_black_48px"/>
+
+        </LinearLayout>
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:id="@+id/ProgresBar_SeekBar"/>
+</LinearLayout>
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

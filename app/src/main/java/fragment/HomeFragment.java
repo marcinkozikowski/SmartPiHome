@@ -14,6 +14,7 @@ import com.example.dell.smartpihome.R;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.example.dell.smartpihome.Main3Activity.player;
 import static com.example.dell.smartpihome.Main3Activity.tools;
 
 /**
@@ -32,13 +33,12 @@ public class HomeFragment extends Fragment {
     ImageView kitchenLight;
     ImageView frontDoor;
     ImageView garageDoor;
-    //CurrentDeviceState tool;
+    TextView nowPlaying;
 
     private static final String ARG_PARAM1 = "temp";
     private static final String ARG_PARAM2 = "huminidity";
 
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     TextView tempTextView;
@@ -80,6 +80,7 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home,container,false);
         v =checkLightState(v);
         v =checkDoorState(v);
+        v = checkNowPlaying(v);
         try {
             tempTextView = (TextView)v.findViewById(R.id.TemperatureTextView);
             huminidityTextView = (TextView)v.findViewById(R.id.HumidityTextView);
@@ -92,6 +93,18 @@ public class HomeFragment extends Fragment {
             System.out.println(e.toString());
         }
         return v;
+    }
+
+    public View checkNowPlaying(View inflater)
+    {
+        nowPlaying = (TextView)inflater.findViewById(R.id.NowPlayingHome_TextView);
+
+        if(player.isPlaying())
+        {
+            nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
+        }
+
+        return inflater;
     }
 
     public View checkLightState(View inflater)
