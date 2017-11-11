@@ -85,6 +85,26 @@ public final class CurrentDeviceState {
 
     private static boolean garageDoor,frontDoor;
 
+    private static int kitchenBlindPosition;
+
+    public static int getKitchenBlindPosition() {
+        return kitchenBlindPosition;
+    }
+
+    public static void setKitchenBlindPosition(int kitchenBlindPosition) {
+        CurrentDeviceState.kitchenBlindPosition = kitchenBlindPosition;
+    }
+
+    public static int getLivingRoomBlindPosition() {
+        return livingRoomBlindPosition;
+    }
+
+    public static void setLivingRoomBlindPosition(int livingRoomBlindPosition) {
+        CurrentDeviceState.livingRoomBlindPosition = livingRoomBlindPosition;
+    }
+
+    private static int livingRoomBlindPosition;
+
     public static boolean isAlarm() {
         return alarm;
     }

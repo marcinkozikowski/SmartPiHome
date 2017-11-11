@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.ToggleButton;
 
 import com.example.dell.smartpihome.R;
@@ -16,6 +17,8 @@ public class BlindsFragment extends Fragment {
 
     ToggleButton kitchenBlind;
     ToggleButton livingRoomBlind;
+    SeekBar kitchenBlindSeekBar;
+    SeekBar livingRoomBlindSeekBar;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -53,6 +56,61 @@ public class BlindsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_blinds, container, false);
         v = setCurrentBlindState(v);
+        kitchenBlindSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(final SeekBar seekBar, int ProgressValue, boolean fromUser) {
+                if (fromUser) {
+                    tools.setKitchenBlindPosition(ProgressValue);
+                    if(kitchenBlindSeekBar.getProgress()==kitchenBlindSeekBar.getMax())
+                    {
+                        tools.setKitchenBlind(true);
+                        kitchenBlind.setChecked(true);
+                    }
+                    else if(kitchenBlindSeekBar.getProgress()==0)
+                    {
+                        tools.setKitchenBlind(false);
+                        kitchenBlind.setChecked(false);
+                    }
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        livingRoomBlindSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(final SeekBar seekBar, int ProgressValue, boolean fromUser) {
+                if (fromUser) {
+                    tools.setLivingRoomBlindPosition(ProgressValue);
+                    if(livingRoomBlindSeekBar.getProgress()==livingRoomBlindSeekBar.getMax())
+                    {
+                        tools.setLivingRoomBlind(true);
+                        livingRoomBlind.setChecked(true);
+                    }
+                    else if(livingRoomBlindSeekBar.getProgress()==0)
+                    {
+                        tools.setLivingRoomBlind(false);
+                        livingRoomBlind.setChecked(false);
+                    }
+                }
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         return v;
     }
 
@@ -63,13 +121,11 @@ public class BlindsFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
-
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -80,9 +136,13 @@ public class BlindsFragment extends Fragment {
     {
         kitchenBlind = (ToggleButton)v.findViewById(R.id.kitchenBlindBtn);
         livingRoomBlind = (ToggleButton) v.findViewById(R.id.livingRoomBlindBtn);
+        kitchenBlindSeekBar = (SeekBar)v.findViewById(R.id.kitchenblind1SeekBar);
+        livingRoomBlindSeekBar = (SeekBar)v.findViewById(R.id.blind1SeekBar);
 
         kitchenBlind.setChecked(tools.isKitchenBlind());
         livingRoomBlind.setChecked(tools.isLivingRoomBlind());
+        kitchenBlindSeekBar.setProgress(tools.getKitchenBlindPosition());
+        livingRoomBlindSeekBar.setProgress(tools.getLivingRoomBlindPosition());
 
         return v;
     }

@@ -22,15 +22,17 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:id="@+id/LeftLinearLayout"
             android:layout_weight="2">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/layout_margin"
-                android:background="@drawable/border_with_fill"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_margin="@dimen/layout_margin"
+                android:layout_weight="2"
+                android:id="@+id/LightLinearLayout"
+                android:background="@drawable/border_with_fill"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -40,107 +42,117 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_lightbulb_outline_black_48px"
-                        />
+                        android:src="@drawable/ic_lightbulb_outline_black_48px" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
-                        android:textColor="@color/headerTextColor"
-                        android:textSize="@dimen/header_text_size"
                         android:text="Oświetlenie"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="@color/headerTextColor"
+                        android:textSize="@dimen/header_text_size" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="Salon"
-                        android:paddingLeft="@dimen/header_margin"
-                        android:layout_weight="1"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="5"
-                        android:padding="5dp"
-                        android:id="@+id/LivingRoomLightImg"
-                        android:src="@drawable/light_bulb_off"/>
-
-                </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:paddingLeft="@dimen/header_margin"
-                            android:text="Kuchnia"
-                            android:layout_weight="1"/>
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="5"
-                            android:padding="5dp"
-                            android:id="@+id/KitchenLightImg"
-                            android:src="@drawable/light_bulb_off"/>
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:paddingLeft="@dimen/header_margin"
-                            android:text="Korytarz"
-                            android:layout_weight="1"/>
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="5"
-                            android:padding="5dp"
-                            android:id="@+id/CorridorLightImg"
-                            android:src="@drawable/light_bulb_off"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/header_margin"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:text="Garaż"/>
+                            android:paddingLeft="@dimen/header_margin"
+                            android:text="Salon" />
+
                         <ImageView
+                            android:id="@+id/LivingRoomLightImg"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="5"
                             android:padding="5dp"
+                            android:src="@drawable/light_bulb_off" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:paddingLeft="@dimen/header_margin"
+                            android:text="Kuchnia" />
+
+                        <ImageView
+                            android:id="@+id/KitchenLightImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5"
+                            android:padding="5dp"
+                            android:src="@drawable/light_bulb_off" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:paddingLeft="@dimen/header_margin"
+                            android:text="Korytarz" />
+
+                        <ImageView
+                            android:id="@+id/CorridorLightImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5"
+                            android:padding="5dp"
+                            android:src="@drawable/light_bulb_off" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:paddingLeft="@dimen/header_margin"
+                            android:text="Garaż" />
+
+                        <ImageView
                             android:id="@+id/GarageLightImg"
-                            android:src="@drawable/light_bulb_off"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5"
+                            android:padding="5dp"
+                            android:src="@drawable/light_bulb_off" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -148,11 +160,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/layout_margin"
+                android:layout_weight="1"
+                android:id="@+id/DoorLinearLayout"
                 android:background="@drawable/border_with_fill"
-                android:layout_height="wrap_content">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -162,42 +175,45 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_door"
-                        />
+                        android:src="@drawable/ic_door" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
-                        android:textColor="@color/headerTextColor"
-                        android:textSize="@dimen/header_text_size"
                         android:text="Drzwi"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:textColor="@color/headerTextColor"
+                        android:textSize="@dimen/header_text_size" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:text="Wejściowe"
+                            android:layout_weight="1"
                             android:paddingLeft="@dimen/header_margin"
-                            android:layout_weight="1"/>
+                            android:text="Wejściowe" />
+
                         <ImageView
+                            android:id="@+id/FrontDoorImg"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:id="@+id/FrontDoorImg"
-                            android:src="@drawable/icons8_door_closed_filled_100"/>
+                            android:src="@drawable/icons8_door_closed_filled_100" />
 
                     </LinearLayout>
 
@@ -206,13 +222,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
                             android:paddingLeft="@dimen/header_margin"
-                            android:text="Garażowe"
-                            android:layout_weight="1"/>
+                            android:text="Garażowe" />
 
                         <ImageView
                             android:id="@+id/GarageDoorImg"
@@ -232,6 +249,7 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="1"
+                android:id="@+id/BlindsLinearLayout"
                 android:layout_margin="@dimen/layout_margin"
                 android:background="@drawable/border_with_fill"
                 android:layout_height="wrap_content">
@@ -249,7 +267,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:textColor="@color/headerTextColor"
                         android:textSize="@dimen/header_text_size"
@@ -268,19 +286,35 @@
                         android:layout_weight="1"
                         android:orientation="horizontal">
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:text="Salon"
                             android:paddingLeft="@dimen/header_margin"
-                            android:layout_weight="1"/>
-                        <ImageView
+                            android:layout_weight="6"/>
+
+                        <Space
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:padding="5dp"
+                            android:layout_weight="1"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|right"
+                            android:gravity="right"
+                            android:paddingLeft="@dimen/header_margin"
+                            android:text="0/4"
+                            android:maxLines="1"
+                            android:id="@+id/LivingRoomBlindPosition"
+                            android:layout_weight="4"
+                            />
+
+                        <ImageView
                             android:id="@+id/LivingRoomBlindsImg"
-                            android:src="@drawable/ic_blinds_black_48px"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="right|center_vertical"
+                            android:src="@drawable/ic_blinds_black_48px" />
 
                     </LinearLayout>
 
@@ -290,17 +324,32 @@
                         android:layout_weight="1"
                         android:orientation="horizontal">
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
+                            android:layout_gravity="center_vertical|left"
                             android:paddingLeft="@dimen/header_margin"
+                            android:layout_weight="6"
                             android:text="Kuchenne"
-                            android:layout_weight="1"/>
-                        <ImageView
+                            />
+                        <Space
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:padding="5dp"
+                            android:layout_weight="1"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/KitchenBlindPosition"
+                            android:layout_gravity="center_vertical|right"
+                            android:gravity="right"
+                            android:paddingLeft="@dimen/header_margin"
+                            android:text="0/4"
+                            android:maxLines="1"
+                            android:layout_weight="4"
+                            />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="right|center_vertical"
                             android:id="@+id/KitchenBlindsImg"
                             android:src="@drawable/ic_blinds_black_48px"/>
 

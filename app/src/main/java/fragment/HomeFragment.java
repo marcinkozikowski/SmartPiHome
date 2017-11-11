@@ -29,6 +29,8 @@ public class HomeFragment extends Fragment {
     ImageView garageDoor;
     ImageView kitchenBlind;
     ImageView livingRoomBlind;
+    TextView kitchenBlindPosition;
+    TextView livingRoomBlindPosition;
     TextView nowPlaying;
     ImageView nextSong;
     ImageView previousSong;
@@ -266,6 +268,9 @@ public class HomeFragment extends Fragment {
         kitchenBlind = (ImageView)inflater.findViewById(R.id.KitchenBlindsImg);
         livingRoomBlind = (ImageView)inflater.findViewById(R.id.LivingRoomBlindsImg);
 
+        kitchenBlindPosition =(TextView)inflater.findViewById(R.id.KitchenBlindPosition) ;
+        livingRoomBlindPosition =(TextView)inflater.findViewById(R.id.LivingRoomBlindPosition);
+
         if(tools.isKitchenBlind())
         {
             kitchenBlind.setImageResource(R.drawable.blinds_close);
@@ -273,6 +278,8 @@ public class HomeFragment extends Fragment {
         else{
             kitchenBlind.setImageResource(R.drawable.blinds_open);
         }
+        kitchenBlindPosition.setText(tools.getKitchenBlindPosition()+"/4");
+        livingRoomBlindPosition.setText(tools.getLivingRoomBlindPosition()+"/4");
 
         if(tools.isLivingRoomBlind())
         {
