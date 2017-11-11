@@ -45,21 +45,6 @@ public final class CurrentDeviceState {
         CurrentDeviceState.fastLight = fastLight;
     }
 
-    public static int getKitchenBlind() {
-        return kitchenBlind;
-    }
-
-    public static void setKitchenBlind(int kitchenBlind) {
-        CurrentDeviceState.kitchenBlind = kitchenBlind;
-    }
-
-    public static int getLivingRoomBlind() {
-        return livingRoomBlind;
-    }
-
-    public static void setLivingRoomBlind(int livingRoomBlind) {
-        CurrentDeviceState.livingRoomBlind = livingRoomBlind;
-    }
 
     public static boolean isGarageDoor() {
         return garageDoor;
@@ -80,8 +65,24 @@ public final class CurrentDeviceState {
     private static boolean kitchenLight=false,livingRoomLight=false,corridorLight=false,garageLight=false,fastLight=false;
 
 
+    public static boolean isKitchenBlind() {
+        return kitchenBlind;
+    }
 
-    private static int kitchenBlind,livingRoomBlind;
+    public static void setKitchenBlind(boolean kitchenBlind) {
+        CurrentDeviceState.kitchenBlind = kitchenBlind;
+    }
+
+    public static boolean isLivingRoomBlind() {
+        return livingRoomBlind;
+    }
+
+    public static void setLivingRoomBlind(boolean livingRoomBlind) {
+        CurrentDeviceState.livingRoomBlind = livingRoomBlind;
+    }
+
+    private static boolean kitchenBlind,livingRoomBlind;
+
     private static boolean garageDoor,frontDoor;
 
     public static boolean isAlarm() {

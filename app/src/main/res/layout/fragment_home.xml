@@ -570,28 +570,28 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:padding="5dp"
-                                android:id="@+id/PreviousImg"
+                                android:id="@+id/PreviousImgHome"
                                 android:src="@drawable/ic_skip_previous_black_48px"/>
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:padding="5dp"
-                                android:id="@+id/StopImg"
+                                android:id="@+id/StopImgHome"
                                 android:src="@drawable/ic_stop_black_48px"/>
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:padding="5dp"
-                                android:id="@+id/NowPlayingImg"
+                                android:id="@+id/NowPlayingImgHome"
                                 android:src="@drawable/ic_play_arrow_black_48px"/>
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:padding="5dp"
-                                android:id="@+id/NextImg"
+                                android:id="@+id/NextImgHome"
                                 android:src="@drawable/ic_skip_next_black_48px"/>
 
                         </LinearLayout>

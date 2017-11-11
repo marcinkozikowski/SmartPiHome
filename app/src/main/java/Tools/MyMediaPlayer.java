@@ -24,8 +24,23 @@ public final class MyMediaPlayer {
         return currentSong;
     }
 
-    public static void setCurrentSong(Song currentSong) {
-        MyMediaPlayer.currentSong = currentSong;
+    public int getDuration()
+    {
+        return player.getDuration();
+    }
+
+    public int currentPosition()
+    {
+        return player.getCurrentPosition();
+    }
+
+    public void seekTo(int position)
+    {
+        player.seekTo(position);
+    }
+
+    public static  void setCurrentSong(Song _currentSong) {
+        currentSong = _currentSong;
     }
 
     public boolean isPlaying() {
@@ -40,8 +55,8 @@ public final class MyMediaPlayer {
         return currentPlaylist;
     }
 
-    public static void setCurrentPlaylist(List<Song> currentPlaylist) {
-        MyMediaPlayer.currentPlaylist = currentPlaylist;
+    public static void setCurrentPlaylist(List<Song> _currentPlaylist) {
+       currentPlaylist = _currentPlaylist;
     }
 
     private static List<Song> currentPlaylist = new ArrayList<>();
@@ -78,6 +93,7 @@ public final class MyMediaPlayer {
                 player.setDataSource(currentPlaylist.get(current+1).getPath());
                 player.prepare();
                 player.start();
+                currentSong = currentPlaylist.get(current+1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -90,10 +106,47 @@ public final class MyMediaPlayer {
                 player.setDataSource(currentPlaylist.get(0).getPath());
                 player.prepare();
                 player.start();
+                currentSong = currentPlaylist.get(0);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+    public void previousSong()
+    {
+        int current = currentPlaylist.indexOf(currentSong);
+        if(current-1>=0) {
+            player.reset();
+            try {
+                player.setDataSource(currentPlaylist.get(current-1).getPath());
+                player.prepare();
+                player.start();
+                currentSong = currentPlaylist.get(current-1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else
+        {
+            player.reset();
+            try {
+                player.setDataSource(currentPlaylist.get(currentPlaylist.size()-1).getPath());
+                player.prepare();
+                player.start();
+                currentSong = currentPlaylist.get(currentPlaylist.size()-1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void pouseSong()
+    {
+        player.pause();
+    }
+    public void playSong()
+    {
+        player.start();
     }
 
 

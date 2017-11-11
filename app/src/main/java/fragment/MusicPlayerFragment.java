@@ -10,7 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.example.dell.smartpihome.R;
 
@@ -21,15 +24,21 @@ import java.util.List;
 
 import CustomListAdapters.MusicListAdapter;
 import CustomListAdapters.Song;
-import Tools.MyMediaPlayer;
 
-public class MusicPlayerFragment extends Fragment {
+import static com.example.dell.smartpihome.Main3Activity.player;
 
-    MyMediaPlayer player=new MyMediaPlayer();
+public class MusicPlayerFragment extends Fragment{
+
     List<Song> songsList = new ArrayList<Song>();
     ListView songsListView;
     MusicListAdapter musicAdapter;
     Song choosenSong;
+    TextView nowPlaying;
+    ImageView nextSong;
+    ImageView previousSong;
+    ImageView stopSong;
+    ImageView playPouseSong;
+    SeekBar seekBar;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -103,8 +112,19 @@ public class MusicPlayerFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_music_player, container, false);
+        nowPlaying = (TextView)v.findViewById(R.id.NowPlaying_TextView);
         songsListView = (ListView)v.findViewById(R.id.MusicListView);
+        nextSong = (ImageView)v.findViewById(R.id.NextImg);
+        previousSong = (ImageView)v.findViewById(R.id.PreviousImg);
+        stopSong=(ImageView)v.findViewById(R.id.StopImg);
+        playPouseSong = (ImageView)v.findViewById(R.id.NowPlayingImg);
+        seekBar = (SeekBar)v.findViewById(R.id.ProgresBarPlayer_SeekBar);
         RefreshList(v);
+        if(player.isPlaying())
+        {
+            nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
+        }
+        getSeekBarStatus();
         songsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -113,8 +133,74 @@ public class MusicPlayerFragment extends Fragment {
                 //Toast.makeText(getContext(), "Nie można odtworzyć wybrango utworu "+choosenSong.getPath().toString(), Toast.LENGTH_SHORT).show();
                 try {
                     player.startPlaying();
+                    nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
                 } catch (IOException e) {
                     e.printStackTrace();
+                }
+            }
+        });
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progress=0;
+
+            @Override
+            public void onProgressChanged(final SeekBar seekBar, int ProgressValue, boolean fromUser) {
+                if (fromUser) {
+                    player.seekTo(ProgressValue);//if user drags the seekbar, it gets the position and updates in textView.
+                }
+                final long mMinutes=(ProgressValue/1000)/60;//converting into minutes
+                final int mSeconds=((ProgressValue/1000)%60);//converting into seconds
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        nextSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.nextSong();
+                if(player.isPlaying())
+                {
+                    nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
+                }
+            }
+        });
+        previousSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.previousSong();
+                if(player.isPlaying())
+                {
+                    nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
+                }
+            }
+        });
+        stopSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.stopPlaying();
+                if(player.isPlaying())
+                {
+                    nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
+                }
+            }
+        });
+        playPouseSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(player.isPlaying())
+                {
+                    player.pouseSong();
+                }
+                else
+                {
+                    player.playSong();
                 }
             }
         });
@@ -138,12 +224,39 @@ public class MusicPlayerFragment extends Fragment {
 //        }
 //    }
 
+    public void getSeekBarStatus(){
+
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                int currentPosition = 0;
+                int total = player.getDuration();
+                seekBar.setMax(total);
+                while (player != null && currentPosition < total) {
+                    try {
+                        Thread.sleep(1000);
+                        currentPosition = player.currentPosition();
+                    } catch (InterruptedException e) {
+                        return;
+                    }
+                    seekBar.setProgress(currentPosition);
+
+                }
+            }
+        }).start();
+    }
+
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
+
+
+
+
 
     public interface OnFragmentInteractionListener {
 

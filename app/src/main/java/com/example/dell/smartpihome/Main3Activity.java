@@ -19,7 +19,6 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.gson.JsonObject;
@@ -37,7 +36,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import CustomListAdapters.Song;
 import Tools.CurrentDeviceState;
 import Tools.MyMediaPlayer;
 import fragment.AlarmFragment;
@@ -602,11 +600,27 @@ public class Main3Activity extends AppCompatActivity
         {
             currentButton = (ToggleButton) findViewById(view.getId());
             number =1;
+            if(currentButton.isChecked())
+            {
+                tools.setLivingRoomBlind(true);
+            }
+            else
+            {
+                tools.setLivingRoomBlind(false);
+            }
         }
         else if(view.getId()==R.id.kitchenBlindBtn)
         {
             currentButton = (ToggleButton) findViewById(view.getId());
             number=2;
+            if(currentButton.isChecked())
+            {
+                tools.setKitchenBlind(true);
+            }
+            else
+            {
+                tools.setKitchenBlind(false);
+            }
         }
 
         if(currentButton.isChecked()==true)
@@ -660,22 +674,12 @@ public class Main3Activity extends AppCompatActivity
         finish();
     }
 
-    public void PlaySelectedSong(View view) {
-        Song choosenSong;
-        try {
-            MusicListView = (ListView)view.findViewById(R.id.MusicListView);
-            View parentRow = (View) view.getParent();
-            //MusicListView = (ListView) parentRow.getParent();
-            final int position = MusicListView.getPositionForView(parentRow);
-            Toast.makeText(this, "Position "+position, Toast.LENGTH_SHORT).show();
-//            choosenSong = player.getCurrentPlaylist().get(position);
-//            player.setCurrentSong(choosenSong);
-//            player.startPlaying();
-
-        }
-        catch (Exception e)
+    public void playNextSong_Click(View view) {
+        player.nextSong();
+        TextView nowPlaying = (TextView)view.findViewById(R.id.NowPlayingHome_TextView);
+        if(player.isPlaying())
         {
-            Toast.makeText(this, "Nie można odtworzyć wybrango utworu "+player.getCurrentSong().getPath().toString(), Toast.LENGTH_SHORT).show();
+            nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
         }
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.dell.smartpihome.R;
@@ -17,14 +18,7 @@ import java.util.List;
 import static com.example.dell.smartpihome.Main3Activity.player;
 import static com.example.dell.smartpihome.Main3Activity.tools;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link HomeFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class HomeFragment extends Fragment {
 
     ImageView livingRoomLight;
@@ -33,7 +27,14 @@ public class HomeFragment extends Fragment {
     ImageView kitchenLight;
     ImageView frontDoor;
     ImageView garageDoor;
+    ImageView kitchenBlind;
+    ImageView livingRoomBlind;
     TextView nowPlaying;
+    ImageView nextSong;
+    ImageView previousSong;
+    ImageView stopSong;
+    ImageView playPouseSong;
+    SeekBar seekBar;
 
     private static final String ARG_PARAM1 = "temp";
     private static final String ARG_PARAM2 = "huminidity";
@@ -81,18 +82,115 @@ public class HomeFragment extends Fragment {
         v =checkLightState(v);
         v =checkDoorState(v);
         v = checkNowPlaying(v);
+        v = checkBlindState(v);
+
         try {
             tempTextView = (TextView)v.findViewById(R.id.TemperatureTextView);
             huminidityTextView = (TextView)v.findViewById(R.id.HumidityTextView);
+            nextSong = (ImageView)v.findViewById(R.id.NextImgHome);
+            previousSong = (ImageView)v.findViewById(R.id.PreviousImgHome);
+            stopSong=(ImageView)v.findViewById(R.id.StopImgHome);
+            playPouseSong = (ImageView)v.findViewById(R.id.NowPlayingImgHome);
+            seekBar = (SeekBar)v.findViewById(R.id.ProgresBar_SeekBar);
+
             tempTextView.setText(mParam1 + " ºC");
             huminidityTextView.setText(mParam2 + " %");
             System.out.println(mParam1+"\t"+mParam2);
+            getSeekBarStatus();
         }
         catch(Exception e)
         {
             System.out.println(e.toString());
         }
+        nextSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.nextSong();
+                if(player.isPlaying())
+                {
+                    nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
+                }
+            }
+        });
+        previousSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.previousSong();
+                if(player.isPlaying())
+                {
+                    nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
+                }
+            }
+        });
+        stopSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.stopPlaying();
+                if(player.isPlaying())
+                {
+                    nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
+                }
+            }
+        });
+        playPouseSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(player.isPlaying())
+                {
+                    player.pouseSong();
+                }
+                else
+                {
+                    player.playSong();
+                }
+            }
+        });
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progress=0;
+
+            @Override
+            public void onProgressChanged(final SeekBar seekBar, int ProgressValue, boolean fromUser) {
+                if (fromUser) {
+                    player.seekTo(ProgressValue);//if user drags the seekbar, it gets the position and updates in textView.
+                }
+                final long mMinutes=(ProgressValue/1000)/60;//converting into minutes
+                final int mSeconds=((ProgressValue/1000)%60);//converting into seconds
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         return v;
+    }
+
+    public void getSeekBarStatus(){
+
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                int currentPosition = 0;
+                int total = player.getDuration();
+                seekBar.setMax(total);
+                while (player != null && currentPosition < total) {
+                    try {
+                        Thread.sleep(1000);
+                        currentPosition = player.currentPosition();
+                    } catch (InterruptedException e) {
+                        return;
+                    }
+                    seekBar.setProgress(currentPosition);
+
+                }
+            }
+        }).start();
     }
 
     public View checkNowPlaying(View inflater)
@@ -159,6 +257,29 @@ public class HomeFragment extends Fragment {
         }
         else{
             garageDoor.setImageResource(R.drawable.icons8_front_gate_open_filled_100);
+        }
+        return inflater;
+    }
+
+    public View checkBlindState(View inflater)
+    {
+        kitchenBlind = (ImageView)inflater.findViewById(R.id.KitchenBlindsImg);
+        livingRoomBlind = (ImageView)inflater.findViewById(R.id.LivingRoomBlindsImg);
+
+        if(tools.isKitchenBlind())
+        {
+            kitchenBlind.setImageResource(R.drawable.blinds_close);
+        }
+        else{
+            kitchenBlind.setImageResource(R.drawable.blinds_open);
+        }
+
+        if(tools.isLivingRoomBlind())
+        {
+            livingRoomBlind.setImageResource(R.drawable.blinds_close);
+        }
+        else{
+            livingRoomBlind.setImageResource(R.drawable.blinds_open);
         }
         return inflater;
     }
