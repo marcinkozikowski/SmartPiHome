@@ -52,6 +52,7 @@ public class Main3Activity extends AppCompatActivity
     PubNub pubnub;
     Switch light;
     Switch garage;
+    Toolbar toolbar;
     SeekBar seekBar1;
     TextView temperatureTextView;
     TextView humidityTextView;
@@ -67,18 +68,12 @@ public class Main3Activity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
-        //TODO: dodac pozostale kontrolki
+        checkPinNumbersSettings();
+        setActionBarIcon();
+
+        //TODO: dodac pozostale kontrolki i stworzyc metode w ktorej wszystkie bede na poczatki inicjalizowane
         light = (Switch) findViewById(R.id.lightBtn);
         garage = (Switch)findViewById(R.id.garageBtn);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.smart_pi_home);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.smart_pi_home);
-        getSupportActionBar().setLogo(R.drawable.smart_pi_home);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -91,6 +86,7 @@ public class Main3Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         PNConfiguration pnConfiguration = new PNConfiguration();
+
         pnConfiguration.setSubscribeKey("sub-c-0baf6e4c-c5ff-11e6-b2ab-0619f8945a4f");
         pnConfiguration.setPublishKey("pub-c-2902e976-c6d8-41bd-bebf-f3a14c238494");
 
@@ -209,6 +205,40 @@ public class Main3Activity extends AppCompatActivity
         fragmentTransaction1.commit();
     }
 
+    private void setActionBarIcon()
+    {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.smart_pi_home);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.smart_pi_home);
+        getSupportActionBar().setLogo(R.drawable.smart_pi_home);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void checkPinNumbersSettings()
+    {
+        SharedPreferences settings = getSharedPreferences("UserData", 0); // 0 - for private mode
+        boolean hasSettings = settings.getBoolean("hasSettingSet", false);
+        if(hasSettings==false)
+        {
+            Intent setting = new Intent(this, SettingsActivity.class);
+            startActivity(setting);
+            finish();
+        }
+        else if(hasSettings==true)
+        {
+            tools.setLivingRoomLightPin(settings.getInt("livingRoomLight",0));
+            tools.setKitchenLightPin(settings.getInt("kitchenLight",0));
+            tools.setCorridorLightPin(settings.getInt("corridorLight",0));
+            tools.setGarageLightPin(settings.getInt("garageLight",0));
+            tools.setFrontDoorPin(settings.getInt("frontDoor",0));
+            tools.setGarageDoorPin(settings.getInt("garageDoor",0));
+            tools.setLivingRoomBlindPin(settings.getInt("livingRoomBlind",0));
+            tools.setKitchenBlindPin(settings.getInt("kitchenBlind",0));
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -229,13 +259,8 @@ public class Main3Activity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //TODO: obsluzyc menu ustawienia w ktorym bedzie mozna zmienic poszczegolne piny oswietlenia lub drzwi
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -338,6 +363,11 @@ public class Main3Activity extends AppCompatActivity
                     fragment);
             fragmentTransaction1.commit();
         }
+        else if(id==R.id.nav_settings)
+        {
+            Intent setting = new Intent(this,SettingsActivity.class);
+            startActivity(setting);
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -386,7 +416,6 @@ public class Main3Activity extends AppCompatActivity
                 });
     }
 
-    // TODO: dopisac metode wykrywajaca jakie swiatlo wlaczyc i jaki pin przydzielic np poprzez schared prefrences
     public void LightClick(View view) {
 
         int pin = 0;
@@ -399,7 +428,7 @@ public class Main3Activity extends AppCompatActivity
 
         if(view.getId()==R.id.lightBtn)
         {
-            pin =3;
+            pin =tools.getLivingRoomLightPin();
             currentButton = (ToggleButton) findViewById(view.getId());
             if (currentButton.isChecked()==true)
             {
@@ -412,7 +441,7 @@ public class Main3Activity extends AppCompatActivity
         }
         else if(view.getId()==R.id.kitchenLightBtn)
         {
-            pin =4;
+            pin =tools.getKitchenLightPin();
             currentButton = (ToggleButton) findViewById(view.getId());
             if (currentButton.isChecked()==true)
             {
@@ -425,7 +454,7 @@ public class Main3Activity extends AppCompatActivity
         }
         else if(view.getId()==R.id.CorridorLightBtn)
         {
-            pin =27;
+            pin =tools.getCorridorLightPin();
             currentButton = (ToggleButton) findViewById(view.getId());
             if (currentButton.isChecked()==true)
             {
@@ -438,7 +467,7 @@ public class Main3Activity extends AppCompatActivity
         }
         else if(view.getId()==R.id.GarageLightBtn)
         {
-            pin =22;
+            pin =tools.getGarageLightPin();
             currentButton = (ToggleButton) findViewById(view.getId());
             if (currentButton.isChecked()==true)
             {
@@ -462,17 +491,17 @@ public class Main3Activity extends AppCompatActivity
             }
             if(currentButton.isChecked()==true)
             {
-                publishMessage(prepareMessage("light",1,3));
-                publishMessage(prepareMessage("light",1,4));
-                publishMessage(prepareMessage("light",1,27));
-                publishMessage(prepareMessage("light",1,22));
+                publishMessage(prepareMessage("light",1,tools.getLivingRoomLightPin()));
+                publishMessage(prepareMessage("light",1,tools.getKitchenLightPin()));
+                publishMessage(prepareMessage("light",1,tools.getCorridorLightPin()));
+                publishMessage(prepareMessage("light",1,tools.getGarageLightPin()));
             }
             else
             {
-                publishMessage(prepareMessage("light",0,3));
-                publishMessage(prepareMessage("light",0,4));
-                publishMessage(prepareMessage("light",0,27));
-                publishMessage(prepareMessage("light",0,22));
+                publishMessage(prepareMessage("light",0,tools.getLivingRoomLightPin()));
+                publishMessage(prepareMessage("light",0,tools.getKitchenLightPin()));
+                publishMessage(prepareMessage("light",0,tools.getCorridorLightPin()));
+                publishMessage(prepareMessage("light",0,tools.getGarageLightPin()));
             }
             lightButtonsUpdate();
         }
@@ -514,8 +543,6 @@ public class Main3Activity extends AppCompatActivity
         }
     }
 
-
-    // TODO: zmienic garageDoor na uniwewrslana metode door i wykrywac o ktore drzwi nam chodzi
     public void doorClick(View view) {
 
         int pin = 0;
@@ -526,7 +553,7 @@ public class Main3Activity extends AppCompatActivity
 
         if(view.getId()==R.id.garageDoorBtn)
         {
-            pin =17;
+            pin =tools.getGarageDoorPin();
             currentButton = (ToggleButton) findViewById(view.getId());
             if(currentButton.isChecked())
             {
@@ -539,7 +566,7 @@ public class Main3Activity extends AppCompatActivity
         }
         else if(view.getId()==R.id.frontDoorBtn)
         {
-            pin =10;
+            pin =tools.getFrontDoorPin();
             currentButton = (ToggleButton) findViewById(view.getId());
             if(currentButton.isChecked())
             {
@@ -576,8 +603,8 @@ public class Main3Activity extends AppCompatActivity
         {
             if(currentButton.getId()==R.id.allDoorBtn)
             {
-                publishMessage(prepareMessage("door",1,17));
-                publishMessage(prepareMessage("door",1,10));
+                publishMessage(prepareMessage("door",1,tools.getGarageDoorPin()));
+                publishMessage(prepareMessage("door",1,tools.getFrontDoorPin()));
             }
             publishMessage(prepareMessage("door",1,pin));
         }
@@ -585,8 +612,8 @@ public class Main3Activity extends AppCompatActivity
         {
             if(currentButton.getId()==R.id.allDoorBtn)
             {
-                publishMessage(prepareMessage("door",0,17));
-                publishMessage(prepareMessage("door",0,10));
+                publishMessage(prepareMessage("door",0,tools.getGarageDoorPin()));
+                publishMessage(prepareMessage("door",0,tools.getFrontDoorPin()));
             }
             publishMessage(prepareMessage("door",0,pin));
         }
@@ -674,13 +701,5 @@ public class Main3Activity extends AppCompatActivity
         finish();
     }
 
-    public void playNextSong_Click(View view) {
-        player.nextSong();
-        TextView nowPlaying = (TextView)view.findViewById(R.id.NowPlayingHome_TextView);
-        if(player.isPlaying())
-        {
-            nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
-        }
-    }
 }
 

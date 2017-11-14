@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/layout_margin"
-            android:background="@drawable/border"
+            android:background="@drawable/border_with_fill"
             android:orientation="vertical"
             android:padding="@dimen/border_padding">
 
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="@dimen/layout_margin"
-                android:background="@drawable/border"
+                android:background="@drawable/border_with_fill"
                 android:orientation="horizontal">
 
                 <TextView
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="@dimen/layout_margin"
-                android:background="@drawable/border"
+                android:background="@drawable/border_with_fill"
                 android:orientation="horizontal">
 
                 <TextView
@@ -113,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/layout_margin"
-            android:background="@drawable/border"
+            android:background="@drawable/border_with_fill"
             android:orientation="vertical"
             android:padding="@dimen/border_padding">
 
@@ -132,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/border"
+                android:background="@drawable/border_with_fill"
                 android:layout_margin="@dimen/layout_margin"
                 android:orientation="horizontal">
 

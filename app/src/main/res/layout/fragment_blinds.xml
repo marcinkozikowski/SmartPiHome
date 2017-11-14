@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/border"
+            android:background="@drawable/border_with_fill"
             android:padding="@dimen/border_padding"
             android:layout_margin="@dimen/layout_margin">
 
@@ -106,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/border"
+            android:background="@drawable/border_with_fill"
             android:padding="@dimen/border_padding"
             android:layout_margin="@dimen/layout_margin">
 

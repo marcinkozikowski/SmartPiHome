@@ -5,6 +5,87 @@ package Tools;
  */
 
 public final class CurrentDeviceState {
+
+    private static int livingRoomLightPin;
+    private static int kitchenLightPin;
+    private static int garageLightPin;
+    private static int corridorLightPin;
+    private static int garageDoorPin;
+    private static int frontDoorPin;
+    private static int kitchenBlindPin;
+    private static int livingRoomBlindPin;
+    private static int livingRoomBlindPosition;
+    private static boolean alarm;
+    private static boolean kitchenBlind,livingRoomBlind;
+    private static boolean garageDoor,frontDoor;
+    private static int kitchenBlindPosition;
+
+    public static int getLivingRoomLightPin() {
+        return livingRoomLightPin;
+    }
+
+    public static void setLivingRoomLightPin(int livingRoomLightPin) {
+        CurrentDeviceState.livingRoomLightPin = livingRoomLightPin;
+    }
+
+    public static int getKitchenLightPin() {
+        return kitchenLightPin;
+    }
+
+    public static void setKitchenLightPin(int kitchenLightPin) {
+        CurrentDeviceState.kitchenLightPin = kitchenLightPin;
+    }
+
+    public static int getGarageLightPin() {
+        return garageLightPin;
+    }
+
+    public static void setGarageLightPin(int garageLightPin) {
+        CurrentDeviceState.garageLightPin = garageLightPin;
+    }
+
+    public static int getCorridorLightPin() {
+        return corridorLightPin;
+    }
+
+    public static void setCorridorLightPin(int corridorLightPin) {
+        CurrentDeviceState.corridorLightPin = corridorLightPin;
+    }
+
+    public static int getGarageDoorPin() {
+        return garageDoorPin;
+    }
+
+    public static void setGarageDoorPin(int garageDoorPin) {
+        CurrentDeviceState.garageDoorPin = garageDoorPin;
+    }
+
+    public static int getFrontDoorPin() {
+        return frontDoorPin;
+    }
+
+    public static void setFrontDoorPin(int frontDoorPin) {
+        CurrentDeviceState.frontDoorPin = frontDoorPin;
+    }
+
+    public static int getKitchenBlindPin() {
+        return kitchenBlindPin;
+    }
+
+    public static void setKitchenBlindPin(int kitchenBlindPin) {
+        CurrentDeviceState.kitchenBlindPin = kitchenBlindPin;
+    }
+
+    public static int getLivingRoomBlindPin() {
+        return livingRoomBlindPin;
+    }
+
+    public static void setLivingRoomBlindPin(int livingRoomBlindPin) {
+        CurrentDeviceState.livingRoomBlindPin = livingRoomBlindPin;
+    }
+
+
+
     public static boolean isKitchenLight() {
         return kitchenLight;
     }
@@ -81,12 +162,6 @@ public final class CurrentDeviceState {
         CurrentDeviceState.livingRoomBlind = livingRoomBlind;
     }
 
-    private static boolean kitchenBlind,livingRoomBlind;
-
-    private static boolean garageDoor,frontDoor;
-
-    private static int kitchenBlindPosition;
-
     public static int getKitchenBlindPosition() {
         return kitchenBlindPosition;
     }
@@ -103,8 +178,6 @@ public final class CurrentDeviceState {
         CurrentDeviceState.livingRoomBlindPosition = livingRoomBlindPosition;
     }
 
-    private static int livingRoomBlindPosition;
-
     public static boolean isAlarm() {
         return alarm;
     }
@@ -113,5 +186,4 @@ public final class CurrentDeviceState {
         CurrentDeviceState.alarm = alarm;
     }
 
-    private static boolean alarm;
 }
