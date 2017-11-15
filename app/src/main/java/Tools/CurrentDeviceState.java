@@ -20,6 +20,16 @@ public final class CurrentDeviceState {
     private static boolean garageDoor,frontDoor;
     private static int kitchenBlindPosition;
 
+    public static boolean isMotionDetected() {
+        return motionDetected;
+    }
+
+    public static void setMotionDetected(boolean motionDetected) {
+        CurrentDeviceState.motionDetected = motionDetected;
+    }
+
+    private static boolean motionDetected;
+
     public static int getLivingRoomLightPin() {
         return livingRoomLightPin;
     }

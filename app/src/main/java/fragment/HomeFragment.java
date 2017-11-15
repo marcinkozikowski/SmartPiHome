@@ -1,11 +1,14 @@
 package fragment;
 
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -14,6 +17,8 @@ import com.example.dell.smartpihome.R;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.example.dell.smartpihome.Main3Activity.player;
 import static com.example.dell.smartpihome.Main3Activity.tools;
@@ -37,6 +42,9 @@ public class HomeFragment extends Fragment {
     ImageView stopSong;
     ImageView playPouseSong;
     SeekBar seekBar;
+    ImageView animationImage;
+    Timer timer;
+    static Animation animation1;
 
     private static final String ARG_PARAM1 = "temp";
     private static final String ARG_PARAM2 = "huminidity";
@@ -53,8 +61,6 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -85,6 +91,8 @@ public class HomeFragment extends Fragment {
         v =checkDoorState(v);
         v = checkNowPlaying(v);
         v = checkBlindState(v);
+        checkAlarmState(v);
+        isMotionDetected();
 
         try {
             tempTextView = (TextView)v.findViewById(R.id.TemperatureTextView);
@@ -99,6 +107,7 @@ public class HomeFragment extends Fragment {
             huminidityTextView.setText(mParam2 + " %");
             System.out.println(mParam1+"\t"+mParam2);
             getSeekBarStatus();
+            stopOrStartAnimation();
         }
         catch(Exception e)
         {
@@ -170,6 +179,65 @@ public class HomeFragment extends Fragment {
             }
         });
         return v;
+    }
+
+    private void checkAlarmState(View v)
+    {
+        TextView alarm = (TextView)v.findViewById(R.id.AlarmActivTextView);
+        if(tools.isAlarm())
+        {
+            alarm.setTextColor(getResources().getColor(R.color.AlarmEnabled));
+            alarm.setTypeface(null, Typeface.BOLD);
+            alarm.setText("Włączony");
+        }
+        else
+        {
+            alarm.setTextColor(getResources().getColor(R.color.AlarmDiseabled));
+            alarm.setTypeface(null, Typeface.BOLD);
+            alarm.setText("Wyłączony");
+        }
+    }
+
+    public void stopOrStartAnimation()
+    {
+        timer = new Timer();
+        TimerTask t = new TimerTask() {
+            @Override
+            public void run() {
+                isMotionDetected();
+            }
+        };
+        timer.scheduleAtFixedRate(t,1000,1000);
+    }
+    public void isMotionDetected()
+    {
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                try {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            animationImage = (ImageView) getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.MotionImg);
+                            animation1 =
+                                    AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.blink);
+                            animation1.setRepeatMode(Animation.RESTART);
+                            animation1.setRepeatCount(Animation.INFINITE);
+                            if(tools.isMotionDetected()) {
+                                animationImage.startAnimation(animation1);
+                            }
+                            else
+                            {
+                                animationImage.clearAnimation();
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            };
+        };
+        thread.start();
     }
 
     public void getSeekBarStatus(){
@@ -291,7 +359,6 @@ public class HomeFragment extends Fragment {
         return inflater;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -312,12 +379,12 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        timer.cancel();
         mListener = null;
     }
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

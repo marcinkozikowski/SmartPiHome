@@ -146,6 +146,7 @@ public class Main3Activity extends AppCompatActivity
                 if (message.getChannel() != null) {
                     try{
                         JsonObject msg = message.getMessage().getAsJsonObject();
+                        System.out.println(msg.toString());
                         if(msg.get("what").getAsString().equals("temp"))
                         {
                             temp = msg.get("pin").getAsString();
@@ -153,6 +154,16 @@ public class Main3Activity extends AppCompatActivity
 
                             System.out.println("Temperature from Pi: " + temp);
                             System.out.println("Huminidity from Pi: "+huminidity);
+                        }
+                        else if(msg.get("what").getAsString().equals("motion")){
+                            if(msg.get("isInMotion").getAsString().equals("0"))
+                            {
+                                tools.setMotionDetected(false);
+                            }
+                            else
+                            {
+                                tools.setMotionDetected(true);
+                            }
                         }
 
                     } catch (Exception e)
@@ -616,6 +627,24 @@ public class Main3Activity extends AppCompatActivity
                 publishMessage(prepareMessage("door",0,tools.getFrontDoorPin()));
             }
             publishMessage(prepareMessage("door",0,pin));
+        }
+    }
+
+    public void alarm_Click(View view) {
+        if(tools.isAlarm())
+        {
+            tools.setAlarm(false);
+        }
+        else
+        {
+            tools.setAlarm(true);
+        }
+        if(tools.isAlarm()) {
+            publishMessage(prepareMessage("alarm", 1, 11));
+        }
+        else if(tools.isAlarm()==false)
+        {
+            publishMessage(prepareMessage("alarm", 0, 11));
         }
     }
 

@@ -11,6 +11,9 @@
     <color name="backgroundColor">#F5F5F5</color>
     <color name="headerTextColor">#494949</color>
 
+    <color name="AlarmEnabled">#4DB6AC</color>
+    <color name="AlarmDiseabled">#E53935</color>
+
 
 
 
