@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/blinds_fragment"
     tools:context="fragment.BlindsFragment">
 
     <LinearLayout
@@ -84,7 +85,7 @@
                     android:gravity="left"
                     android:layout_weight="1"/>
 
-                <android.support.v7.widget.AppCompatSeekBar
+                <SeekBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:max="4"

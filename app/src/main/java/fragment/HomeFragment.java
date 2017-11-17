@@ -218,17 +218,21 @@ public class HomeFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            animationImage = (ImageView) getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.MotionImg);
-                            animation1 =
-                                    AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.blink);
-                            animation1.setRepeatMode(Animation.RESTART);
-                            animation1.setRepeatCount(Animation.INFINITE);
-                            if(tools.isMotionDetected()) {
-                                animationImage.startAnimation(animation1);
+                            try {
+                                animationImage = (ImageView) getActivity().getWindow().getDecorView().getRootView().findViewById(R.id.MotionImg);
+                                animation1 =
+                                        AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.blink);
+                                animation1.setRepeatMode(Animation.RESTART);
+                                animation1.setRepeatCount(Animation.INFINITE);
+                                if (tools.isMotionDetected()) {
+                                    animationImage.startAnimation(animation1);
+                                } else {
+                                    animationImage.clearAnimation();
+                                }
                             }
-                            else
+                            catch (Exception e)
                             {
-                                animationImage.clearAnimation();
+                                e.printStackTrace();
                             }
                         }
                     });

@@ -651,6 +651,8 @@ public class Main3Activity extends AppCompatActivity
     public void blindClick(View view)
     {
         ToggleButton currentButton=null;
+        SeekBar livingRoom = (SeekBar)view.findViewById(R.id.blind1SeekBar);
+        SeekBar kitchen = (SeekBar)view.findViewById(R.id.kitchenblind1SeekBar);
         int number=0;
         if(view.getId()==R.id.livingRoomBlindBtn)
         {
@@ -659,10 +661,12 @@ public class Main3Activity extends AppCompatActivity
             if(currentButton.isChecked())
             {
                 tools.setLivingRoomBlind(true);
+                tools.setLivingRoomBlindPosition(4);
             }
             else
             {
                 tools.setLivingRoomBlind(false);
+                tools.setLivingRoomBlindPosition(0);
             }
         }
         else if(view.getId()==R.id.kitchenBlindBtn)
@@ -672,10 +676,12 @@ public class Main3Activity extends AppCompatActivity
             if(currentButton.isChecked())
             {
                 tools.setKitchenBlind(true);
+                tools.setKitchenBlindPosition(4);
             }
             else
             {
                 tools.setKitchenBlind(false);
+                tools.setKitchenBlindPosition(0);
             }
         }
 
