@@ -92,7 +92,9 @@ public class AlarmFragment extends Fragment {
                                 }
                                 else
                                 {
-                                    animationImage.clearAnimation();
+                                    if(animationImage!=null) {
+                                        animationImage.clearAnimation();
+                                    }
                                 }
                             }
                         });

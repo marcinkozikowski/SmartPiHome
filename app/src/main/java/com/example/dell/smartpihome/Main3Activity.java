@@ -1,5 +1,9 @@
 package com.example.dell.smartpihome;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +15,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +38,7 @@ import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,6 +73,8 @@ public class Main3Activity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+
+        String menuFragment="";
 
         checkPinNumbersSettings();
         setActionBarIcon();
@@ -165,6 +173,20 @@ public class Main3Activity extends AppCompatActivity
                                 tools.setMotionDetected(true);
                             }
                         }
+                        else if(msg.get("what").getAsString().equals("notification")){
+                            Calendar cal = Calendar.getInstance(); // get current time in a Calendar
+
+                            int hour = cal.get(Calendar.HOUR_OF_DAY);
+                            int minutes = cal.get(Calendar.MINUTE);
+                            if(minutes<10)
+                            {
+                                addNotification(hour+" : 0"+minutes);
+                            }
+                            else
+                            {
+                                addNotification(hour+" : "+minutes);
+                            }
+                        }
 
                     } catch (Exception e)
                     {
@@ -197,6 +219,11 @@ public class Main3Activity extends AppCompatActivity
             }
         });
 
+        if(getIntent().getStringExtra("fragment")!=null)
+        {
+            menuFragment = getIntent().getStringExtra("fragment");
+        }
+
         pubnub.subscribe().channels(Arrays.asList("SmartPiHome")).execute();
         publishMessage(prepareMessage("temp",1,26));
 
@@ -214,6 +241,22 @@ public class Main3Activity extends AppCompatActivity
 
         fragment.setArguments(bundle);
         fragmentTransaction1.commit();
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        if (menuFragment != null) {
+
+            if (menuFragment.equals("camera")) {
+                CameraFragment favoritesFragment = new CameraFragment();
+                fragmentTransaction.replace(R.id.mainFrame, favoritesFragment).commit();
+            }
+            else if(menuFragment.equals("alarm"))
+            {
+                AlarmFragment standardFragment = new AlarmFragment();
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.mainFrame, standardFragment).commit();
+            }
+        }
     }
 
     private void setActionBarIcon()
@@ -287,7 +330,7 @@ public class Main3Activity extends AppCompatActivity
         if (id == R.id.nav_home) {
             Fragment fragment = new HomeFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
+//            fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
 
             FragmentTransaction fragmentTransaction1 = fragmentManager
                     .beginTransaction();
@@ -312,55 +355,55 @@ public class Main3Activity extends AppCompatActivity
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
 
-            FragmentTransaction fragmentTransaction1 = fragmentManager
-                    .beginTransaction();
-            fragmentTransaction1.replace(R.id.mainFrame,
-                    fragment);
-            fragmentTransaction1.commit();
+//            FragmentTransaction fragmentTransaction1 = fragmentManager
+//                    .beginTransaction();
+//            fragmentTransaction1.replace(R.id.mainFrame,
+//                    fragment);
+//            fragmentTransaction1.commit();
 
         } else if (id == R.id.nav_blinds) {
             Fragment fragment = new BlindsFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
 
-            FragmentTransaction fragmentTransaction1 = fragmentManager
-                    .beginTransaction();
-            fragmentTransaction1.replace(R.id.mainFrame,
-                    fragment);
-            fragmentTransaction1.commit();
+//            FragmentTransaction fragmentTransaction1 = fragmentManager
+//                    .beginTransaction();
+//            fragmentTransaction1.replace(R.id.mainFrame,
+//                    fragment);
+//            fragmentTransaction1.commit();
 
         } else if (id == R.id.nav_door) {
             Fragment fragment = new DoorFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
 
-            FragmentTransaction fragmentTransaction1 = fragmentManager
-                    .beginTransaction();
-            fragmentTransaction1.replace(R.id.mainFrame,
-                    fragment);
-            fragmentTransaction1.commit();
+//            FragmentTransaction fragmentTransaction1 = fragmentManager
+//                    .beginTransaction();
+//            fragmentTransaction1.replace(R.id.mainFrame,
+//                    fragment);
+//            fragmentTransaction1.commit();
 
         } else if (id == R.id.nav_alarm) {
             Fragment fragment = new AlarmFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
 
-            FragmentTransaction fragmentTransaction1 = fragmentManager
-                    .beginTransaction();
-            fragmentTransaction1.replace(R.id.mainFrame,
-                    fragment);
-            fragmentTransaction1.commit();
+//            FragmentTransaction fragmentTransaction1 = fragmentManager
+//                    .beginTransaction();
+//            fragmentTransaction1.replace(R.id.mainFrame,
+//                    fragment);
+//            fragmentTransaction1.commit();
 
         } else if (id == R.id.nav_camera) {
             Fragment fragment = new CameraFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
 
-            FragmentTransaction fragmentTransaction1 = fragmentManager
-                    .beginTransaction();
-            fragmentTransaction1.replace(R.id.mainFrame,
-                    fragment);
-            fragmentTransaction1.commit();
+//            FragmentTransaction fragmentTransaction1 = fragmentManager
+//                    .beginTransaction();
+//            fragmentTransaction1.replace(R.id.mainFrame,
+//                    fragment);
+//            fragmentTransaction1.commit();
 
         } else if (id==R.id.nav_stream)
         {
@@ -368,11 +411,11 @@ public class Main3Activity extends AppCompatActivity
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
 
-            FragmentTransaction fragmentTransaction1 = fragmentManager
-                    .beginTransaction();
-            fragmentTransaction1.replace(R.id.mainFrame,
-                    fragment);
-            fragmentTransaction1.commit();
+//            FragmentTransaction fragmentTransaction1 = fragmentManager
+//                    .beginTransaction();
+//            fragmentTransaction1.replace(R.id.mainFrame,
+//                    fragment);
+//            fragmentTransaction1.commit();
         }
         else if(id==R.id.nav_settings)
         {
@@ -711,6 +754,42 @@ public class Main3Activity extends AppCompatActivity
         {
             login.setTitle("Wyloguj");
         }
+    }
+
+    public void addNotification(String time) {
+
+        Intent alarmIntent = new Intent(this, Main3Activity.class);
+        alarmIntent.putExtra("fragment", "alarm");
+        PendingIntent alarmPendingIntent = PendingIntent.getActivity(this, 0, alarmIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Intent cameraIntent = new Intent(this, Main3Activity.class);
+        cameraIntent.putExtra("fragment", "camera");
+        PendingIntent cameraPendingIntent = PendingIntent.getActivity(this, 1, cameraIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        NotificationCompat.Builder builder =
+                (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.alarm_worning)
+                        .setContentTitle("ALARM !! Wykryto intruza !!")
+                        .setContentText("Ostatnio wykryto ruch o godzinie: "+time)
+                        .setContentIntent(cameraPendingIntent)
+                        .addAction(android.R.drawable.ic_menu_camera, "Kamery", cameraPendingIntent)
+                        .addAction(android.R.drawable.ic_dialog_alert, "Alarm", alarmPendingIntent);
+
+
+
+
+        // Add as notification
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Notification notification = builder.build();
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+        notification.defaults |= Notification.DEFAULT_SOUND;
+        notification.defaults |= Notification.DEFAULT_VIBRATE;
+
+        manager.notify(1, notification);
     }
 
     public void LoginLogout_Click(MenuItem item) {

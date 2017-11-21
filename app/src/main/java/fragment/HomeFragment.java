@@ -227,7 +227,9 @@ public class HomeFragment extends Fragment {
                                 if (tools.isMotionDetected()) {
                                     animationImage.startAnimation(animation1);
                                 } else {
-                                    animationImage.clearAnimation();
+                                    if(animationImage!=null) {
+                                        animationImage.clearAnimation();
+                                    }
                                 }
                             }
                             catch (Exception e)
