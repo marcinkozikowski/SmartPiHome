@@ -17,7 +17,7 @@
         <LinearLayout
             android:id="@+id/lightLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/layout_margin"
             android:layout_weight="4"
             android:background="@drawable/border_with_fill"
@@ -194,29 +194,63 @@
         <LinearLayout
             android:id="@+id/lightOptionsLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/layout_margin"
             android:layout_weight="1"
             android:background="@drawable/border_with_fill"
             android:orientation="vertical"
             android:padding="@dimen/border_padding">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:layout_columnSpan="2"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/layout_margin"
-                android:layout_row="0"
-                android:text="Szybie akcje"
-                android:textSize="@dimen/header_text_size" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:text="Sceny"
+                    android:textSize="@dimen/header_text_size" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:background="@drawable/border_btn"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="@dimen/layout_margin"
+                        android:text="Dodaj" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/addScene_ImageView"
+                        android:layout_margin="@dimen/header_margin"
+                        android:src="@drawable/ic_add_box_black_48px"/>
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+
 
             <LinearLayout
                 android:id="@+id/FastLightLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:visibility="visible"
                 android:layout_margin="@dimen/layout_margin"
                 android:background="@drawable/border_with_fill"
                 android:orientation="horizontal"
@@ -249,8 +283,17 @@
                     android:onClick="LightClick"
                     android:textOff="Off"
                     android:textOn="On" />
+
             </LinearLayout>
             </LinearLayout>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                android:id="@+id/lightScene_ListView">
+
+            </ListView>
 
         </LinearLayout>
     </LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/layout_margin"
+    android:padding="@dimen/layout_margin"
+    android:background="@drawable/border_with_fill">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sceneName_TextView"
+            android:text="Scene Name"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left|center_vertical"
+            android:layout_margin="@dimen/layout_margin"
+            android:layout_centerVertical="true"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="45dp"
+            android:layout_gravity="right"
+            android:gravity="right|center_vertical"
+            android:padding="@dimen/layout_margin"
+            android:background="@drawable/border_with_fill">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content"
+                android:id="@+id/sceneLivingRoom_ImageView"
+                android:src="@drawable/light_bulb_on" />
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/sceneKitchen_ImageView"
+                android:src="@drawable/light_bulb_on"/>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/sceneCorridor_ImageView"
+                android:src="@drawable/light_bulb_on" />
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/sceneGarage_ImageView"
+                android:src="@drawable/light_bulb_on"/>
+
+        </LinearLayout>
+
+
+
+
+</RelativeLayout>

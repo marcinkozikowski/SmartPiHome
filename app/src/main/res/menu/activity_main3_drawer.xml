@@ -8,10 +8,12 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_48px"
             android:title="Pulpit" />
+        <group>
         <item
             android:id="@+id/nav_light"
             android:icon="@drawable/ic_lightbulb_outline_black_48px"
             android:title="Oświetlenie" />
+        </group>
         <item
             android:id="@+id/nav_door"
             android:icon="@drawable/ic_door"

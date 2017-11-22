@@ -6,20 +6,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ToggleButton;
 
 import com.example.dell.smartpihome.R;
 
+import java.util.List;
+
+import CustomListAdapters.LightSceneAdapter;
+import Entities.LightScene;
+
 import static com.example.dell.smartpihome.Main3Activity.tools;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link LightFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link LightFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class LightFragment extends Fragment {
     //CurrentDeviceState tools;
     ToggleButton livingRoomLight;
@@ -27,6 +27,10 @@ public class LightFragment extends Fragment {
     ToggleButton corridorLight;
     ToggleButton kitchenLight;
     ToggleButton fastLight;
+    ImageView addScene;
+    ListView scenesListView;
+    LightSceneAdapter lightSceneAdapter;
+    List<LightScene> lc;
 
     private OnFragmentInteractionListener mListener;
 
@@ -53,7 +57,11 @@ public class LightFragment extends Fragment {
                              Bundle savedInstanceState) {
         View inflatedView = null;
 
+
+
+
         inflatedView = inflater.inflate(R.layout.fragment_light, container, false);
+        addScene = (ImageView)inflatedView.findViewById(R.id.addScene_ImageView);
         //setCurrentLightState(inflatedView);
         setCurrentLightState(inflatedView);
 //        livingRoomLight = (ToggleButton) inflatedView.findViewById(R.id.lightBtn);
@@ -69,7 +77,17 @@ public class LightFragment extends Fragment {
 //        kitchenLight.setChecked(tools.isKitchenLight());
 //        fastLight.setChecked(tools.isFastLight());
 
+
         return inflatedView;
+    }
+
+    private void updateSceneList(View v)
+    {
+        scenesListView = (ListView)v.findViewById(R.id.lightScene_ListView);
+
+        lightSceneAdapter= new LightSceneAdapter(getContext());      // Ustawianie wlasnego adaptera w celu wyswietlenia listy
+
+        scenesListView.setAdapter(lightSceneAdapter);
     }
 
     public View setCurrentLightState(View inflater)
