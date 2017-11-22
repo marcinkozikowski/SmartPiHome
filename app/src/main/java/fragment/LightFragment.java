@@ -6,10 +6,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ToggleButton;
 
+import com.example.dell.smartpihome.Main3Activity;
 import com.example.dell.smartpihome.R;
 
 import java.util.List;
@@ -31,6 +34,8 @@ public class LightFragment extends Fragment {
     ListView scenesListView;
     LightSceneAdapter lightSceneAdapter;
     List<LightScene> lc;
+    LightScene choosenLightScene;
+    LinearLayout addNewScene;
 
     private OnFragmentInteractionListener mListener;
 
@@ -38,7 +43,6 @@ public class LightFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static LightFragment newInstance(String param1, String param2) {
         LightFragment fragment = new LightFragment();
         return fragment;
@@ -47,9 +51,8 @@ public class LightFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //tools.setLivingRoomLight(true);
-        //livingRoomLight.setChecked(true);
 
+        lc = LightScene.listAll(LightScene.class);
     }
 
     @Override
@@ -57,36 +60,78 @@ public class LightFragment extends Fragment {
                              Bundle savedInstanceState) {
         View inflatedView = null;
 
-
-
-
         inflatedView = inflater.inflate(R.layout.fragment_light, container, false);
         addScene = (ImageView)inflatedView.findViewById(R.id.addScene_ImageView);
-        //setCurrentLightState(inflatedView);
-        setCurrentLightState(inflatedView);
-//        livingRoomLight = (ToggleButton) inflatedView.findViewById(R.id.lightBtn);
-//        livingRoomLight.setChecked(tools.isLivingRoomLight());
-//        garageLight = (ToggleButton) inflatedView.findViewById(R.id.GarageLightBtn);
-//        corridorLight = (ToggleButton) inflatedView.findViewById(R.id.CorridorLightBtn);
-//        kitchenLight = (ToggleButton) inflatedView.findViewById(R.id.kitchenLightBtn);
-//        fastLight = (ToggleButton) inflatedView.findViewById(R.id.fastLightBtn);
-//
-//        livingRoomLight.setChecked(tools.isLivingRoomLight());
-//        garageLight.setChecked(tools.isGarageLight());
-//        corridorLight.setChecked(tools.isCorridorLight());
-//        kitchenLight.setChecked(tools.isKitchenLight());
-//        fastLight.setChecked(tools.isFastLight());
+        addNewScene = (LinearLayout)inflatedView.findViewById(R.id.addNewScene);
 
+        setCurrentLightState(inflatedView);
+
+        updateSceneList(inflatedView);
+
+        scenesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                choosenLightScene = lc.get(position);
+                try {
+                    Main3Activity activity = (Main3Activity) getActivity();
+                    activity.LightSceneClick(choosenLightScene);
+
+                    if (choosenLightScene.isLivingRoom()) {
+                        tools.setLivingRoomLight(true);
+                        livingRoomLight.setChecked(tools.isLivingRoomLight());
+                    } else {
+                        tools.setLivingRoomLight(false);
+                        livingRoomLight.setChecked(tools.isLivingRoomLight());
+                    }
+                    if (choosenLightScene.isKitchen()) {
+                        tools.setKitchenLight(true);
+                        kitchenLight.setChecked(tools.isKitchenLight());
+                    } else {
+                        tools.setKitchenLight(false);
+                        kitchenLight.setChecked(tools.isKitchenLight());
+                    }
+                    if (choosenLightScene.isGarage()) {
+                        tools.setGarageLight(true);
+                        garageLight.setChecked(tools.isGarageLight());
+                    } else {
+                        tools.setGarageLight(false);
+                        garageLight.setChecked(tools.isGarageLight());
+                    }
+                    if (choosenLightScene.isCorridor()) {
+                        tools.setCorridorLight(true);
+                        corridorLight.setChecked(tools.isCorridorLight());
+                    } else {
+                        tools.setCorridorLight(false);
+                        corridorLight.setChecked(tools.isCorridorLight());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        View finalInflatedView = inflatedView;
+        addNewScene.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                LightScene filmy = new LightScene("Filmy",true,false,false,false);
+                filmy.save();
+                lightSceneAdapter.notifyDataSetChanged();
+                updateSceneList(finalInflatedView);
+            }
+        });
+
+        //TODO add pop up window or new activity to add user defined light scens
 
         return inflatedView;
     }
 
     private void updateSceneList(View v)
     {
+        lc = LightScene.listAll(LightScene.class);
         scenesListView = (ListView)v.findViewById(R.id.lightScene_ListView);
-
-        lightSceneAdapter= new LightSceneAdapter(getContext());      // Ustawianie wlasnego adaptera w celu wyswietlenia listy
-
+        lightSceneAdapter= new LightSceneAdapter(lc,getContext());
         scenesListView.setAdapter(lightSceneAdapter);
     }
 
@@ -96,34 +141,22 @@ public class LightFragment extends Fragment {
         garageLight = (ToggleButton) inflater.findViewById(R.id.GarageLightBtn);
         corridorLight = (ToggleButton) inflater.findViewById(R.id.CorridorLightBtn);
         kitchenLight = (ToggleButton) inflater.findViewById(R.id.kitchenLightBtn);
-        fastLight = (ToggleButton) inflater.findViewById(R.id.fastLightBtn);
+        //fastLight = (ToggleButton) inflater.findViewById(R.id.fastLightBtn);
 
         livingRoomLight.setChecked(tools.isLivingRoomLight());
         garageLight.setChecked(tools.isGarageLight());
         corridorLight.setChecked(tools.isCorridorLight());
         kitchenLight.setChecked(tools.isKitchenLight());
-        fastLight.setChecked(tools.isFastLight());
+        //fastLight.setChecked(tools.isFastLight());
 
         return inflater;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
-
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
 
     @Override
     public void onDetach() {
@@ -132,7 +165,6 @@ public class LightFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

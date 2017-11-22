@@ -1,16 +1,13 @@
 package Entities;
 
 
-import io.realm.RealmObject;
+import com.orm.SugarRecord;
 
-/**
- * Created by Dell on 2017-11-22.
- */
+public class LightScene extends SugarRecord {
 
-public class LightScene extends RealmObject {
+    private String sceneName;
+    private boolean livingRoom,kitchen,corridor,garage;
 
-    public String sceneName;
-    public boolean livingRoom,kitchen,corridor,garage;
 
     public LightScene() {
     }
@@ -20,6 +17,46 @@ public class LightScene extends RealmObject {
         this.livingRoom = livingRoom;
         this.kitchen = kitchen;
         this.corridor = corridor;
+        this.garage = garage;
+    }
+
+    public String getSceneName() {
+        return sceneName;
+    }
+
+    public void setSceneName(String sceneName) {
+        this.sceneName = sceneName;
+    }
+
+    public boolean isLivingRoom() {
+        return livingRoom;
+    }
+
+    public void setLivingRoom(boolean livingRoom) {
+        this.livingRoom = livingRoom;
+    }
+
+    public boolean isKitchen() {
+        return kitchen;
+    }
+
+    public void setKitchen(boolean kitchen) {
+        this.kitchen = kitchen;
+    }
+
+    public boolean isCorridor() {
+        return corridor;
+    }
+
+    public void setCorridor(boolean corridor) {
+        this.corridor = corridor;
+    }
+
+    public boolean isGarage() {
+        return garage;
+    }
+
+    public void setGarage(boolean garage) {
         this.garage = garage;
     }
 }

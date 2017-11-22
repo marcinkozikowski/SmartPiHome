@@ -42,6 +42,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import Entities.LightScene;
 import Tools.CurrentDeviceState;
 import Tools.MyMediaPlayer;
 import fragment.AlarmFragment;
@@ -192,21 +193,6 @@ public class Main3Activity extends AppCompatActivity
                     {
                         System.out.println(e.toString());
                     }
-                    // Message has been received on channel group stored in
-                    // message.getChannel()
-//                    JsonObject msg = null;
-//                    if(message.getMessage().isJsonObject()) {
-//                        msg = message.getMessage().getAsJsonObject();
-//                        if(msg.has("what"))
-//                        {
-//                            String temp = msg.get("pin").getAsString();
-//                            String humidity = msg.get("state").getAsString();
-//
-//                            System.out.println(temp);
-//                            System.out.println(humidity);
-//                        }
-//
-//                    }
                 }
                 else {
                     //System.out.print(message.toString());
@@ -532,33 +518,33 @@ public class Main3Activity extends AppCompatActivity
                 tools.setGarageLight(false);
             }
         }
-        else if(view.getId()==R.id.fastLightBtn)
-        {
-            currentButton = (ToggleButton) findViewById(view.getId());
-            if (currentButton.isChecked()==true)
-            {
-                tools.setFastLight(true);
-            }
-            else
-            {
-                tools.setFastLight(false);
-            }
-            if(currentButton.isChecked()==true)
-            {
-                publishMessage(prepareMessage("light",1,tools.getLivingRoomLightPin()));
-                publishMessage(prepareMessage("light",1,tools.getKitchenLightPin()));
-                publishMessage(prepareMessage("light",1,tools.getCorridorLightPin()));
-                publishMessage(prepareMessage("light",1,tools.getGarageLightPin()));
-            }
-            else
-            {
-                publishMessage(prepareMessage("light",0,tools.getLivingRoomLightPin()));
-                publishMessage(prepareMessage("light",0,tools.getKitchenLightPin()));
-                publishMessage(prepareMessage("light",0,tools.getCorridorLightPin()));
-                publishMessage(prepareMessage("light",0,tools.getGarageLightPin()));
-            }
-            lightButtonsUpdate();
-        }
+//        else if(view.getId()==R.id.fastLightBtn)
+//        {
+//            currentButton = (ToggleButton) findViewById(view.getId());
+//            if (currentButton.isChecked()==true)
+//            {
+//                tools.setFastLight(true);
+//            }
+//            else
+//            {
+//                tools.setFastLight(false);
+//            }
+//            if(currentButton.isChecked()==true)
+//            {
+//                publishMessage(prepareMessage("light",1,tools.getLivingRoomLightPin()));
+//                publishMessage(prepareMessage("light",1,tools.getKitchenLightPin()));
+//                publishMessage(prepareMessage("light",1,tools.getCorridorLightPin()));
+//                publishMessage(prepareMessage("light",1,tools.getGarageLightPin()));
+//            }
+//            else
+//            {
+//                publishMessage(prepareMessage("light",0,tools.getLivingRoomLightPin()));
+//                publishMessage(prepareMessage("light",0,tools.getKitchenLightPin()));
+//                publishMessage(prepareMessage("light",0,tools.getCorridorLightPin()));
+//                publishMessage(prepareMessage("light",0,tools.getGarageLightPin()));
+//            }
+//            lightButtonsUpdate();
+//        }
 
         if(currentButton.isChecked()==true)
         {
@@ -575,25 +561,61 @@ public class Main3Activity extends AppCompatActivity
         ToggleButton kitchenRoom = (ToggleButton) findViewById(R.id.kitchenLightBtn);
         ToggleButton corridorRoom = (ToggleButton) findViewById(R.id.CorridorLightBtn);
         ToggleButton garageRoom = (ToggleButton) findViewById(R.id.GarageLightBtn);
-        ToggleButton fastLight = (ToggleButton) findViewById(R.id.fastLightBtn);
-        if (fastLight.isChecked()) {
-            livingRoom.setChecked(true);
-            kitchenRoom.setChecked(true);
-            corridorRoom.setChecked(true);
-            garageRoom.setChecked(true);
-            tools.setKitchenLight(true);
-            tools.setLivingRoomLight(true);
-            tools.setGarageLight(true);
-            tools.setCorridorLight(true);
-        } else {
-            livingRoom.setChecked(false);
-            kitchenRoom.setChecked(false);
-            corridorRoom.setChecked(false);
-            garageRoom.setChecked(false);
-            tools.setKitchenLight(false);
-            tools.setLivingRoomLight(false);
-            tools.setGarageLight(false);
-            tools.setCorridorLight(false);
+        //ToggleButton fastLight = (ToggleButton) findViewById(R.id.fastLightBtn);
+//        if (fastLight.isChecked()) {
+//            livingRoom.setChecked(true);
+//            kitchenRoom.setChecked(true);
+//            corridorRoom.setChecked(true);
+//            garageRoom.setChecked(true);
+//            tools.setKitchenLight(true);
+//            tools.setLivingRoomLight(true);
+//            tools.setGarageLight(true);
+//            tools.setCorridorLight(true);
+//        } else {
+//            livingRoom.setChecked(false);
+//            kitchenRoom.setChecked(false);
+//            corridorRoom.setChecked(false);
+//            garageRoom.setChecked(false);
+//            tools.setKitchenLight(false);
+//            tools.setLivingRoomLight(false);
+//            tools.setGarageLight(false);
+//            tools.setCorridorLight(false);
+//        }
+    }
+
+    public void LightSceneClick(LightScene lc)
+    {
+        if(lc.isLivingRoom())
+        {
+            publishMessage(prepareMessage("light",1,tools.getLivingRoomLightPin()));
+        }
+        else
+        {
+            publishMessage(prepareMessage("light",0,tools.getLivingRoomLightPin()));
+        }
+        if(lc.isKitchen())
+        {
+            publishMessage(prepareMessage("light",1,tools.getKitchenLightPin()));
+        }
+        else
+        {
+            publishMessage(prepareMessage("light",0,tools.getKitchenBlindPin()));
+        }
+        if(lc.isGarage())
+        {
+            publishMessage(prepareMessage("light",1,tools.getGarageLightPin()));
+        }
+        else
+        {
+            publishMessage(prepareMessage("light",0,tools.getGarageLightPin()));
+        }
+        if(lc.isCorridor())
+        {
+            publishMessage(prepareMessage("light",1,tools.getCorridorLightPin()));
+        }
+        else
+        {
+            publishMessage(prepareMessage("light",0,tools.getCorridorLightPin()));
         }
     }
 

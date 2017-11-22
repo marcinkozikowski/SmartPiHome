@@ -32,7 +32,6 @@ public class BlindsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     public static BlindsFragment newInstance(String param1, String param2) {
         BlindsFragment fragment = new BlindsFragment();
         Bundle args = new Bundle();

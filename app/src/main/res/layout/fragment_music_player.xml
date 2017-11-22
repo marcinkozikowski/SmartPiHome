@@ -56,6 +56,8 @@
                 android:id="@+id/MusicListView"
                 android:layout_height="match_parent"
                 android:divider="#00000000"
+                android:listSelector="@color/colorPrimaryDarkGrey"
+                android:choiceMode="singleChoice"
                 android:dividerHeight="5dp">
             </ListView>
         </LinearLayout>

@@ -188,13 +188,13 @@ public class HomeFragment extends Fragment {
         {
             alarm.setTextColor(getResources().getColor(R.color.AlarmEnabled));
             alarm.setTypeface(null, Typeface.BOLD);
-            alarm.setText("Włączony");
+            alarm.setText("Aktywny");
         }
         else
         {
             alarm.setTextColor(getResources().getColor(R.color.AlarmDiseabled));
             alarm.setTypeface(null, Typeface.BOLD);
-            alarm.setText("Wyłączony");
+            alarm.setText("Nieaktywny");
         }
     }
 
@@ -371,16 +371,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
 
     @Override
     public void onDetach() {

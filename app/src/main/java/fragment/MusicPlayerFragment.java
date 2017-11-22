@@ -71,6 +71,7 @@ public class MusicPlayerFragment extends Fragment{
         findAllMusic();
 
     }
+
     public void findAllMusic(){
         ContentResolver contentResolver = getActivity().getContentResolver();
         Uri songUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;

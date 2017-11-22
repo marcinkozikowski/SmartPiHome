@@ -7,27 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dell.smartpihome.R;
 
 import java.util.List;
 
 import Entities.LightScene;
-import io.realm.Realm;
 
-/**
- * Created by Dell on 2017-11-22.
- */
 
 public class LightSceneAdapter extends BaseAdapter {
 
-    Realm realm = Realm.getInstance(Realm.getDefaultConfiguration());
-    List<LightScene> scenes = realm.where(LightScene.class).findAll();
+    List<LightScene> scenes;
     private final LayoutInflater inflater;
     private Context context;
 
-    public LightSceneAdapter(Context context) {
+    public LightSceneAdapter(List<LightScene> list,Context context) {
+        scenes = list;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
     }
@@ -49,7 +47,7 @@ public class LightSceneAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View rowView = inflater.inflate(R.layout.music_item, parent, false);
+        View rowView = inflater.inflate(R.layout.light_scene_item, parent, false);
 
         TextView sceneName = (TextView) rowView.findViewById(R.id.sceneName_TextView);
         ImageView livingRoom = (ImageView)rowView.findViewById(R.id.sceneLivingRoom_ImageView);
@@ -60,32 +58,43 @@ public class LightSceneAdapter extends BaseAdapter {
         Drawable bulbOn = context.getDrawable(R.drawable.light_bulb_on);
         Drawable bulboff = context.getDrawable(R.drawable.light_bulb_off);
 
-        LightScene c = scenes.get(position);
-        sceneName.setText(c.sceneName);
-        if(c.livingRoom) {
+        LightScene c = (LightScene) getItem(position);
+        sceneName.setText(c.getSceneName());
+        if(c.isLivingRoom()) {
             livingRoom.setImageDrawable(bulbOn);
         }else
         {
             livingRoom.setImageDrawable(bulboff);
         }
-        if(c.kitchen) {
+        if(c.isKitchen()) {
             kitchen.setImageDrawable(bulbOn);
         }else
         {
             kitchen.setImageDrawable(bulboff);
         }
-        if(c.corridor) {
+        if(c.isCorridor()) {
             corridor.setImageDrawable(bulbOn);
         }else
         {
             corridor.setImageDrawable(bulboff);
         }
-        if(c.garage) {
+        if(c.isGarage()) {
             garage.setImageDrawable(bulbOn);
         }else
         {
             garage.setImageDrawable(bulboff);
         }
+
+        LinearLayout delete = (LinearLayout) rowView.findViewById(R.id.deleteSceneItem);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scenes.remove(position);
+                c.delete();
+                LightSceneAdapter.this.notifyDataSetChanged();
+                Toast.makeText(parent.getContext(),"Pomyślnie usunięto scenę",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return rowView;
     }
