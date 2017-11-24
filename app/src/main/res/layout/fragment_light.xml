@@ -14,9 +14,8 @@
         <LinearLayout
             android:id="@+id/lightLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/layout_margin"
-            android:layout_weight="1"
             android:background="@drawable/border_with_fill"
             android:orientation="vertical"
             android:padding="@dimen/border_padding">
@@ -60,7 +59,7 @@
 
                     <ToggleButton
                         android:id="@+id/lightBtn"
-                        android:layout_width="match_parent"
+                        android:layout_width="fill_parent"
                         android:layout_height="@dimen/btn_dimens"
                         android:layout_margin="@dimen/btn_margin"
                         android:background="@drawable/check_light_state"
@@ -198,8 +197,7 @@
         <LinearLayout
             android:id="@+id/lightOptionsLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/layout_margin"
             android:background="@drawable/border_with_fill"
             android:orientation="vertical"
@@ -237,10 +235,9 @@
 
                     <ImageView
                         android:id="@+id/addScene_ImageView"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/btn_dimens"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                        android:layout_margin="@dimen/header_margin"
                         android:src="@drawable/ic_add_box_black_48px" />
                 </LinearLayout>
 
