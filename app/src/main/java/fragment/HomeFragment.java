@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
             playPouseSong = (ImageView)v.findViewById(R.id.NowPlayingImgHome);
             seekBar = (SeekBar)v.findViewById(R.id.ProgresBar_SeekBar);
 
-            tempTextView.setText(mParam1 + " ºC");
+            tempTextView.setText(mParam1);
             huminidityTextView.setText(mParam2 + " %");
             System.out.println(mParam1+"\t"+mParam2);
             getSeekBarStatus();
