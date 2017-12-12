@@ -1,7 +1,7 @@
 <h1>
 # SmartPiHome
 </h1>
-Smart Home automotion project using raspberry pi 
+Smart Home automotion project using raspberry pi. Project set up while writing engeener degree project. I used android sqlite database with SugarORM, some new UI elements like navigation drawer and fragments.
 <p align="center">
   <img src="https://github.com/marcinkozikowski/SmartPiHome/blob/master/raspberry_pi_3.jpg" width="350"/>
 </p>
