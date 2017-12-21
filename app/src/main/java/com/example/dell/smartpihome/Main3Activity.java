@@ -45,13 +45,13 @@ import java.util.Map;
 import Entities.LightScene;
 import Tools.CurrentDeviceState;
 import Tools.MyMediaPlayer;
-import fragment.AlarmFragment;
-import fragment.BlindsFragment;
-import fragment.CameraFragment;
-import fragment.DoorFragment;
-import fragment.HomeFragment;
-import fragment.LightFragment;
-import fragment.MusicPlayerFragment;
+import Fragments.AlarmFragment;
+import Fragments.BlindsFragment;
+import Fragments.CameraFragment;
+import Fragments.DoorFragment;
+import Fragments.HomeFragment;
+import Fragments.LightFragment;
+import Fragments.MusicPlayerFragment;
 
 public class Main3Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -205,9 +205,9 @@ public class Main3Activity extends AppCompatActivity
             }
         });
 
-        if(getIntent().getStringExtra("fragment")!=null)
+        if(getIntent().getStringExtra("Fragments")!=null)
         {
-            menuFragment = getIntent().getStringExtra("fragment");
+            menuFragment = getIntent().getStringExtra("Fragments");
         }
 
         pubnub.subscribe().channels(Arrays.asList("SmartPiHome")).execute();
@@ -427,7 +427,7 @@ public class Main3Activity extends AppCompatActivity
         return message;
     }
 
-    public Map prepareMessage(String type,int number,int direction,double time)
+    public Map prepareMessage(String type,int number,int direction,int time)
     {
         Map message = new HashMap();
 
@@ -599,7 +599,7 @@ public class Main3Activity extends AppCompatActivity
         }
         else
         {
-            publishMessage(prepareMessage("light",0,tools.getKitchenBlindPin()));
+            publishMessage(prepareMessage("light",0,tools.getKitchenLightPin()));
         }
         if(lc.isGarage())
         {
@@ -713,6 +713,11 @@ public class Main3Activity extends AppCompatActivity
         }
     }
 
+    public void BlindMove(int blindPin,int turns,int direction)
+    {
+        publishMessage(prepareMessage("blind",blindPin,direction,turns));
+    }
+
     public void blindClick(View view)
     {
         ToggleButton currentButton=null;
@@ -781,12 +786,12 @@ public class Main3Activity extends AppCompatActivity
     public void addNotification(String time) {
 
         Intent alarmIntent = new Intent(this, Main3Activity.class);
-        alarmIntent.putExtra("fragment", "alarm");
+        alarmIntent.putExtra("Fragments", "alarm");
         PendingIntent alarmPendingIntent = PendingIntent.getActivity(this, 0, alarmIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         Intent cameraIntent = new Intent(this, Main3Activity.class);
-        cameraIntent.putExtra("fragment", "camera");
+        cameraIntent.putExtra("Fragments", "camera");
         PendingIntent cameraPendingIntent = PendingIntent.getActivity(this, 1, cameraIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 

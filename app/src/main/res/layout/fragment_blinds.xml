@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/blinds_fragment"
-    tools:context="fragment.BlindsFragment">
+    tools:context="Fragments.BlindsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,7 +66,6 @@
                     android:layout_weight="1"
                     android:background="@drawable/check_blinds_state"
                     android:gravity="center"
-                    android:onClick="blindClick"
                     android:textColor="#000000" />
                 </LinearLayout>
 
@@ -81,7 +80,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Zamknięta"
+                    android:text="Otwarta"
                     android:gravity="left"
                     android:layout_weight="1"/>
 
@@ -95,7 +94,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Otwarta"
+                    android:text="Zamknięta"
                     android:gravity="right"
                     android:layout_weight="1"/>
 
@@ -138,8 +137,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/check_blinds_state"
                     android:gravity="center"
-                    android:textColor="#000000"
-                    android:onClick="blindClick"/>
+                    android:textColor="#000000" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -153,7 +151,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Zamknięta"
+                    android:text="Otwarta"
                     android:gravity="left"
                     android:layout_weight="1"/>
 
@@ -167,7 +165,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Otwarta"
+                    android:text="Zamknięta"
                     android:gravity="right"
                     android:layout_weight="1"/>
 
