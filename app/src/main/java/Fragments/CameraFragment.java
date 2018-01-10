@@ -11,6 +11,8 @@ import android.webkit.WebViewClient;
 
 import com.example.dell.smartpihome.R;
 
+import static com.example.dell.smartpihome.Main3Activity.tools;
+
 public class CameraFragment extends Fragment {
 
     WebView webview1;
@@ -74,9 +76,9 @@ public class CameraFragment extends Fragment {
     }
 
     private void openURL() {
-        webview1.loadUrl("http://192.168.1.64:8081");
+        webview1.loadUrl("http://"+tools.getIp()+":8081");
         webview1.requestFocus();
-        webview2.loadUrl("http://192.168.1.64:8082");
+        webview2.loadUrl("http://"+tools.getIp()+":8082");
         webview2.requestFocus();
     }
 

@@ -277,6 +277,7 @@ public class Main3Activity extends AppCompatActivity
             tools.setGarageDoorPin(settings.getInt("garageDoor",0));
             tools.setLivingRoomBlindPin(settings.getInt("livingRoomBlind",0));
             tools.setKitchenBlindPin(settings.getInt("kitchenBlind",0));
+            tools.setIp(settings.getString("ip","0"));
         }
     }
 

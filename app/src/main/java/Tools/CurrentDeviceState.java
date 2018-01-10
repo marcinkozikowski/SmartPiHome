@@ -20,6 +20,16 @@ public final class CurrentDeviceState {
     private static boolean garageDoor,frontDoor;
     private static int kitchenBlindPosition;
 
+    public static String getIp() {
+        return ip;
+    }
+
+    public static void setIp(String ip) {
+        CurrentDeviceState.ip = ip;
+    }
+
+    private static String ip;
+
     public static boolean isMotionDetected() {
         return motionDetected;
     }

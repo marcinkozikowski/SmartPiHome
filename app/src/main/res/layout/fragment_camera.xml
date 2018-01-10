@@ -52,7 +52,7 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/layout_margin"
             android:layout_row="0"
-            android:text="Kamera w Salonie"
+            android:text="Podwórko"
             android:textSize="@dimen/header_text_size" />
 
         <LinearLayout

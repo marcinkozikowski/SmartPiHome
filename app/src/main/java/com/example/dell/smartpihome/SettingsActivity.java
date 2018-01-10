@@ -20,6 +20,7 @@ public class SettingsActivity extends AppCompatActivity {
     EditText kitchenBlind;
     EditText frontDoor;
     EditText garageDoor;
+    EditText ipAddr;
 
 
     @Override
@@ -38,6 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
         kitchenBlind = (EditText) findViewById(R.id.KitchenBlindSettingsET);
         frontDoor = (EditText) findViewById(R.id.FrontDoorSettingsET);
         garageDoor = (EditText) findViewById(R.id.GarageSettingsET);
+        ipAddr = (EditText) findViewById(R.id.IpSettingsET);
 
 
         SharedPreferences settings = getSharedPreferences("UserData", 0); // 0 - for private mode
@@ -52,9 +54,10 @@ public class SettingsActivity extends AppCompatActivity {
             kitchenBlind.setText(Integer.toString(tools.getKitchenBlindPin()));
             frontDoor.setText(Integer.toString(tools.getFrontDoorPin()));
             garageDoor.setText(Integer.toString(tools.getGarageDoorPin()));
+            ipAddr.setText(tools.getIp());
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Nie można zapisać wprowadzonych zmian, sprawdź dane", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Nie można odczytac ustawien, sprawdź dane", Toast.LENGTH_LONG).show();
         }
 
         }
@@ -79,6 +82,8 @@ public class SettingsActivity extends AppCompatActivity {
             tools.setLivingRoomBlindPin(Integer.parseInt(livingRoomBlind.getText().toString()));
                 editor.putInt("kitchenBlind",Integer.parseInt(kitchenBlind.getText().toString()));
             tools.setKitchenBlindPin(Integer.parseInt(kitchenBlind.getText().toString()));
+                editor.putString("ip",ipAddr.getText().toString());
+            tools.setIp(ipAddr.getText().toString());
                 editor.putBoolean("hasSettingSet", true);
                 editor.commit();
                 Toast.makeText(this, "Poprawnie zapisano nowe ustawienia ", Toast.LENGTH_SHORT).show();

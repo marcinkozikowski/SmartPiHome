@@ -48,10 +48,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Roleta w salonie"
-                    android:gravity="left"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="8"/>
+                    android:layout_weight="8"
+                    android:gravity="left"
+                    android:text="Roleta w Salonie" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -119,10 +119,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Roleta w kuchni"
-                    android:gravity="center|left"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="8"/>
+                    android:layout_weight="8"
+                    android:gravity="center|left"
+                    android:text="Roleta w Garderobie" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
