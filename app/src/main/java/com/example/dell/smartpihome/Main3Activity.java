@@ -334,75 +334,36 @@ public class Main3Activity extends AppCompatActivity
 
             fragmentTransaction1.commit();
 
-
-
-
         } else if (id == R.id.nav_light) {
             Fragment fragment = new LightFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
-
-//            FragmentTransaction fragmentTransaction1 = fragmentManager
-//                    .beginTransaction();
-//            fragmentTransaction1.replace(R.id.mainFrame,
-//                    fragment);
-//            fragmentTransaction1.commit();
 
         } else if (id == R.id.nav_blinds) {
             Fragment fragment = new BlindsFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
 
-//            FragmentTransaction fragmentTransaction1 = fragmentManager
-//                    .beginTransaction();
-//            fragmentTransaction1.replace(R.id.mainFrame,
-//                    fragment);
-//            fragmentTransaction1.commit();
-
         } else if (id == R.id.nav_door) {
             Fragment fragment = new DoorFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
-
-//            FragmentTransaction fragmentTransaction1 = fragmentManager
-//                    .beginTransaction();
-//            fragmentTransaction1.replace(R.id.mainFrame,
-//                    fragment);
-//            fragmentTransaction1.commit();
 
         } else if (id == R.id.nav_alarm) {
             Fragment fragment = new AlarmFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
 
-//            FragmentTransaction fragmentTransaction1 = fragmentManager
-//                    .beginTransaction();
-//            fragmentTransaction1.replace(R.id.mainFrame,
-//                    fragment);
-//            fragmentTransaction1.commit();
-
         } else if (id == R.id.nav_camera) {
             Fragment fragment = new CameraFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
-
-//            FragmentTransaction fragmentTransaction1 = fragmentManager
-//                    .beginTransaction();
-//            fragmentTransaction1.replace(R.id.mainFrame,
-//                    fragment);
-//            fragmentTransaction1.commit();
 
         } else if (id==R.id.nav_stream)
         {
             Fragment fragment = new MusicPlayerFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.mainFrame,fragment).commit();
-
-//            FragmentTransaction fragmentTransaction1 = fragmentManager
-//                    .beginTransaction();
-//            fragmentTransaction1.replace(R.id.mainFrame,
-//                    fragment);
-//            fragmentTransaction1.commit();
         }
         else if(id==R.id.nav_settings)
         {
