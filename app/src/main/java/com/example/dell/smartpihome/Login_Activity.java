@@ -41,7 +41,7 @@ public class Login_Activity extends AppCompatActivity {
         try {
             SharedPreferences settings = getSharedPreferences("UserData", 0); // 0 - for private mode
             SharedPreferences.Editor editor = settings.edit();
-            if(PublishKey.getText().length()>3 && SubscribeKey.getText().length()>3)
+            if(PublishKey.getText().length()>42 && SubscribeKey.getText().length()>42)
             {
                 editor.putBoolean("hasLoggedIn", true);
                 editor.putString("publishKey",PublishKey.getText().toString());
@@ -53,7 +53,7 @@ public class Login_Activity extends AppCompatActivity {
                 finish();
             }
             else {
-                Toast.makeText(this, "Wpisane dane są nieprawidłowe.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Wprowadzone dane są nieprawidłowe. ", Toast.LENGTH_LONG).show();
             }
 
         } catch (Exception e) {

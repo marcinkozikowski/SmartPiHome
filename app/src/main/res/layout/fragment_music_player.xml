@@ -38,6 +38,7 @@
                 android:drawableLeft="@drawable/ic_queue_music_black_48px"
                 android:textColor="#FFFFFF"
                 android:id="@+id/SortMusic"
+                android:visibility="invisible"
                 android:background="@drawable/border_btn"
                 android:drawablePadding="7dp"
                 android:text="Sortuj listę utworów"/>

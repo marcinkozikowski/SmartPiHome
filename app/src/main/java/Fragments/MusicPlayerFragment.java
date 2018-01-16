@@ -72,6 +72,33 @@ public class MusicPlayerFragment extends Fragment{
 
     }
 
+    private String convertSongDuration(String duration)
+    {
+        int dur = Integer.parseInt(duration);
+        int hrs = (dur / 3600000);
+        int mns = (dur / 60000) % 60000;
+        int scs = dur % 60000 / 1000;
+        String minutes;
+        String seconds;
+        if(mns<10)
+        {
+            minutes="0"+mns;
+        }
+        else
+        {
+            minutes=mns+"";
+        }
+        if(scs<10)
+        {
+            seconds="0"+scs;
+        }
+        else
+        {
+            seconds=scs+"";
+        }
+        return minutes+":"+seconds;
+    }
+
     public void findAllMusic(){
         ContentResolver contentResolver = getActivity().getContentResolver();
         Uri songUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
@@ -92,7 +119,7 @@ public class MusicPlayerFragment extends Fragment{
                 String duration = songCursor.getString(durationId);
                 String path = songCursor.getString(pathId);
                 File myFile = new File(path.toString());
-                songs.add(new Song(artist, title, myFile.getAbsolutePath(),duration));
+                songs.add(new Song(artist, title, myFile.getAbsolutePath(),convertSongDuration(duration)));
             } while(songCursor.moveToNext());
         }
         player.setCurrentPlaylist(songs);
@@ -124,8 +151,8 @@ public class MusicPlayerFragment extends Fragment{
         if(player.isPlaying())
         {
             nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
+            getSeekBarStatus();
         }
-        getSeekBarStatus();
         songsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -135,6 +162,7 @@ public class MusicPlayerFragment extends Fragment{
                 try {
                     player.startPlaying();
                     nowPlaying.setText(player.getCurrentSong().getArtist()+" "+player.getCurrentSong().getTitle());
+                    getSeekBarStatus();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -242,7 +270,6 @@ public class MusicPlayerFragment extends Fragment{
                         return;
                     }
                     seekBar.setProgress(currentPosition);
-
                 }
             }
         }).start();
