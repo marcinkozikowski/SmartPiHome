@@ -52,7 +52,6 @@ Settings Panel where user can set up a pin number to wich is connected device to
 YouTube Video Showing main futures of implemented Smart home system.
 <p align="center">
   <a href="https://www.youtube.com/watch?v=EDCqrdFl9tA"><img src="https://img.youtube.com/vi/EDCqrdFl9tA/0.jpg" alt="IMAGE ALT TEXT"></a>
-  [![SmartPiHome YouTube Video](https://img.youtube.com/vi/EDCqrdFl9tA/0.jpg)](https://www.youtube.com/watch?v=EDCqrdFl9tA "SmartPiHome Video)
 </p>
 
 
