@@ -49,3 +49,5 @@ Settings Panel where user can set up a pin number to wich is connected device to
   <img src=https://github.com/marcinkozikowski/SmartPiHome/blob/master/ScreenShots/Screenshot_20171124-134212.png width="550"/>
 </p>
 
+[![SmartPiHome YouTube Video](https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg)](https://www.youtube.com/watch?v=StTqXEQ2l-Y "Everything Is AWESOME")
+
