@@ -41,23 +41,23 @@ public class Login_Activity extends AppCompatActivity {
         try {
             SharedPreferences settings = getSharedPreferences("UserData", 0); // 0 - for private mode
             SharedPreferences.Editor editor = settings.edit();
-            if(PublishKey.getText().length()>42 && SubscribeKey.getText().length()>42)
+            if(PublishKey.getText().length()>32 && SubscribeKey.getText().length()>32)
             {
                 editor.putBoolean("hasLoggedIn", true);
                 editor.putString("publishKey",PublishKey.getText().toString());
                 editor.putString("subscribeKey", SubscribeKey.getText().toString());
                 editor.commit();
-                Toast.makeText(this, "Poprawnie zalogowano użytkownika ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Poprawnie zalogowano uzytkownika ", Toast.LENGTH_SHORT).show();
                 Intent mainMenu = new Intent(this, Main3Activity.class);
                 startActivity(mainMenu);
                 finish();
             }
             else {
-                Toast.makeText(this, "Wprowadzone dane są nieprawidłowe. ", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Wprowadzone dane sa nieprawidlowe. ", Toast.LENGTH_LONG).show();
             }
 
         } catch (Exception e) {
-            Toast.makeText(this, "Nie można zalogować, spróbuj ponownie", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Nie mozna zalogowac, sprobuj ponownie", Toast.LENGTH_LONG).show();
         }
     }
 }

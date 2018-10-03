@@ -119,7 +119,9 @@ public class MusicPlayerFragment extends Fragment{
                 String duration = songCursor.getString(durationId);
                 String path = songCursor.getString(pathId);
                 File myFile = new File(path.toString());
-                songs.add(new Song(artist, title, myFile.getAbsolutePath(),convertSongDuration(duration)));
+                if(artist.contains("Kortez")||artist.contains("Franko")) {
+                    songs.add(new Song(artist, title, myFile.getAbsolutePath(), convertSongDuration(duration)));
+                }
             } while(songCursor.moveToNext());
         }
         player.setCurrentPlaylist(songs);
